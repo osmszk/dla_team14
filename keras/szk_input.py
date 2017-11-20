@@ -2,6 +2,7 @@
 
 import csv
 import numpy as np
+import os
 from PIL import Image, ImageTk
 
 def main():
@@ -17,6 +18,8 @@ def read_data(path):
     dataReader = csv.reader(f, delimiter=' ')
     for row in dataReader:
         path = row[0]
+        if not os.path.exists(path):
+            continue
         img = Image.open(path, 'r').resize((112,112))
         img = np.asarray(img)
         imgs.append(img)
