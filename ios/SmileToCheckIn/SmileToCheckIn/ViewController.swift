@@ -305,22 +305,15 @@ extension ViewController {
         DispatchQueue.main.async {
             for ob in observations {
                 print("---------------------------\(ob.identifier):\(ob.confidence)")
-                let label = self.probabilityLabels.filter{ $0.tag == 0 }.first
-                let progress = self.progressViews.filter{ $0.tag == 0 }.first
-                let per = Int(ob.confidence * 100)
-                label?.text = "\(per)%"
-                progress?.progress = ob.confidence
-                
-                
-                //                switch ob.identifier {
-                //                case "reni": self.updateLabel(idx: 0, ob: ob)
-                //                case "kanako": self.updateLabel(idx: 1, ob: ob)
-                //                case "shiori": self.updateLabel(idx: 2, ob: ob)
-                //                case "arin": self.updateLabel(idx: 3, ob: ob)
-                //                case "momoka": self.updateLabel(idx: 4, ob: ob)
-                //                default:
-                //                    break
-                //                }
+                switch ob.identifier {
+                case "kanako": self.updateLabel(idx: 0, ob: ob)
+                case "shiori": self.updateLabel(idx: 1, ob: ob)
+                case "arin": self.updateLabel(idx: 2, ob: ob)
+                case "momoka": self.updateLabel(idx: 3, ob: ob)
+                case "reni": self.updateLabel(idx: 4, ob: ob)
+                default:
+                    break
+                }
             }
         }
     }
