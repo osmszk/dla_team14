@@ -15,8 +15,12 @@ data_augmentation = True
 
 szk_input.main()
 
-# 1 epoch -> 3300sec=55min (@MBP touchbar Core i7 )
-# 200 hour!?
+# @MBP touchbar (3.3GHz Core i7, memory 16GB)
+# 1 epoch -> ETA 3300 (55min)
+
+# @Google Cloud Platform(vCPU x 8, memory 300GB, Ubuntu 16.04)
+# 1 epoch -> ETA 31:30
+
 
 img_rows, img_cols = 112, 112
 img_channels = 3
