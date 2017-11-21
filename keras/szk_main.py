@@ -16,7 +16,7 @@ data_augmentation = True
 szk_input.main()
 
 # @MBP touchbar (3.3GHz Core i7, memory 16GB)
-# 1 epoch -> ETA 3300 (55min)
+# 1 epoch -> ETA 3300 (55min.?)
 
 # @Google Cloud Platform(vCPU x 8, memory 300GB, Ubuntu 16.04)
 # 1 epoch -> ETA 31:30
