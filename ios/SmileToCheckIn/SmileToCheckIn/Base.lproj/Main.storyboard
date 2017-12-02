@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I2d-L6-e9y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9dm-bU-And">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,11 +11,16 @@
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Menlo.ttc">
+            <string>Menlo-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Momo View Controller-->
         <scene sceneID="72F-0e-OA2">
             <objects>
-                <viewController id="I2d-L6-e9y" customClass="MomoViewController" customModule="SmileToCheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MomoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="I2d-L6-e9y" customClass="MomoViewController" customModule="SmileToCheckIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aan-b0-3Ci"/>
                         <viewControllerLayoutGuide type="bottom" id="hAc-OX-quz"/>
@@ -220,7 +225,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QOt-YP-kzx" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="126" y="132"/>
+        </scene>
+        <!--Member View Controller-->
+        <scene sceneID="d9f-DA-xKN">
+            <objects>
+                <viewController storyboardIdentifier="MemberViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9dm-bU-And" customClass="MemberViewController" customModule="SmileToCheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xct-e1-Yez">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-iN-Ha1" userLabel="Results">
+                                <rect key="frame" x="0.0" y="633" width="375" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNh-07-0ix">
+                                        <rect key="frame" x="20" y="10" width="335" height="14"/>
+                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="RNh-07-0ix" firstAttribute="leading" secondItem="XOP-iN-Ha1" secondAttribute="leading" constant="20" id="IAG-aY-8Wm"/>
+                                    <constraint firstItem="RNh-07-0ix" firstAttribute="top" secondItem="XOP-iN-Ha1" secondAttribute="top" constant="10" id="MJW-XV-QU6"/>
+                                    <constraint firstAttribute="trailing" secondItem="RNh-07-0ix" secondAttribute="trailing" constant="20" id="ZQl-LJ-3O7"/>
+                                    <constraint firstAttribute="bottom" secondItem="RNh-07-0ix" secondAttribute="bottom" constant="10" id="rjX-UC-lgc"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g17-1O-381" userLabel="Video Preview">
+                                <rect key="frame" x="27" y="49" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XOP-iN-Ha1" firstAttribute="leading" secondItem="bge-UN-fw7" secondAttribute="leading" id="F0l-Ig-9J8"/>
+                            <constraint firstItem="g17-1O-381" firstAttribute="leading" secondItem="bge-UN-fw7" secondAttribute="leading" constant="27" id="LT0-3h-9qb"/>
+                            <constraint firstItem="bge-UN-fw7" firstAttribute="bottom" secondItem="XOP-iN-Ha1" secondAttribute="bottom" id="aLS-9G-aP8"/>
+                            <constraint firstItem="bge-UN-fw7" firstAttribute="bottom" secondItem="g17-1O-381" secondAttribute="bottom" constant="50" id="axL-Z2-o3W"/>
+                            <constraint firstItem="bge-UN-fw7" firstAttribute="trailing" secondItem="g17-1O-381" secondAttribute="trailing" constant="28" id="ga0-rY-RrX"/>
+                            <constraint firstItem="XOP-iN-Ha1" firstAttribute="trailing" secondItem="bge-UN-fw7" secondAttribute="trailing" id="p9q-1z-hrz"/>
+                            <constraint firstItem="g17-1O-381" firstAttribute="top" secondItem="bge-UN-fw7" secondAttribute="top" constant="29" id="w8s-m1-RZQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bge-UN-fw7"/>
+                    </view>
+                    <connections>
+                        <outlet property="timeLabel" destination="RNh-07-0ix" id="hLu-qP-pjw"/>
+                        <outlet property="videoPreview" destination="g17-1O-381" id="i1d-G8-aQm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qi9-TC-Prf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="774" y="141"/>
         </scene>
     </scenes>
 </document>

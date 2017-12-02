@@ -9,28 +9,54 @@
 import UIKit
 import Metal
 import MetalPerformanceShaders
+import AVFoundation
+import CoreMedia
 
 class MemberViewController: UIViewController {
 
     @IBOutlet weak var videoPreview: UIView!
+    @IBOutlet weak var timeLabel: UILabel!
     
+    let maxBoundingBoxes = 10
     
     var videoCapture: VideoCapture!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
-    var runner: Runner!
+//    var runner: Runner!
     
     var startupGroup = DispatchGroup()
     
     var boundingBoxes = [BoundingBox]()
     var colors: [UIColor] = []
+    let fpsCounter = FPSCounter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        timeLabel.text = ""
         
+        device = MTLCreateSystemDefaultDevice()
+        if device == nil {
+            print("Error: this device does not support Metal")
+            return
+        }
         
+        commandQueue = device.makeCommandQueue()
+        
+        // Set up the bounding boxes.
+        for _ in 0..<maxBoundingBoxes {
+            boundingBoxes.append(BoundingBox())
+        }
+        // Make colors for the bounding boxes. There is one color for each class,
+        // 20 classes in total.
+        for r: CGFloat in [0.2, 0.4, 0.6, 0.8, 1.0] {
+            for g: CGFloat in [0.3, 0.7] {
+                for b: CGFloat in [0.4, 0.8] {
+                    let color = UIColor(red: r, green: g, blue: b, alpha: 1)
+                    colors.append(color)
+                }
+            }
+        }
         
         videoCapture = VideoCapture(device: device)
         videoCapture.delegate = self
@@ -45,11 +71,40 @@ class MemberViewController: UIViewController {
             }
             self.startupGroup.leave()
         }
+        
+//        startupGroup.enter()
+//        runner = Runner(commandQueue: commandQueue, inflightBuffers: MaxBuffersInFlight)
+        
+        
+        startupGroup.notify(queue: .main) {
+            // Add the bounding box layers to the UI, on top of the video preview.
+            for box in self.boundingBoxes {
+                box.addToLayer(self.videoPreview.layer)
+            }
+            
+            // Once the NN is set up, we can start capturing live video.
+            self.fpsCounter.start()
+            self.videoCapture.start()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        print(#function)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        resizePreviewLayer()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func resizePreviewLayer() {
+        videoCapture.previewLayer?.frame = videoPreview.bounds
     }
     
 
@@ -80,6 +135,9 @@ class MemberViewController: UIViewController {
 //            self.fpsCounter.frameCompleted()
 //            self.timeLabel.text = String(format: "%.1f FPS (latency: %.5f sec)", self.fpsCounter.fps, result.latency)
 //        }
+        
+        self.fpsCounter.frameCompleted()
+        self.timeLabel.text = String(format: "%.1f FPS (latency: xxx sec)", self.fpsCounter.fps/*, result.latency*/)
     }
 
 }
