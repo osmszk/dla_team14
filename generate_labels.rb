@@ -1,13 +1,11 @@
 require 'fileutils'
 
 #ラベルをつける
-# ['kanako','shiori','ayaka','momoka','reni']
+# ['takemoto','taniai','suzuki']
 labels = {
-  'kanako' => '0',
-  'shiori' => '1',
-  'ayaka' => '2',
-  'momoka' => '3',
-  'reni' => '4'
+  'takemoto' => '0',
+  'taniai' => '1',
+  'suzuki' => '2'
 }
 
 train_data_path = "./data/train/data.txt"
@@ -19,8 +17,8 @@ FileUtils.touch(test_data_path) unless FileTest.exist?(test_data_path)
 test_label_rows = []
 train_label_rows = []
 labels.each do |talent, label|
-  test_data_paths = Dir.glob("./data/test/#{talent}/*.jpg")
-  train_data_paths = Dir.glob("./data/train/#{talent}/*.jpg")
+  test_data_paths = Dir.glob("./data/test/#{talent}/*.png")
+  train_data_paths = Dir.glob("./data/train/#{talent}/*.png")
 
   test_data_paths.each { |path| test_label_rows.push("#{path} #{label}")}
   train_data_paths.each { |path| train_label_rows.push("#{path} #{label}")}
