@@ -1,9 +1,9 @@
-import cv2 
+import cv2
 import numpy as np
 import os
 from datetime import datetime
 
-## 
+##
 cascade_path = "./haarcascade_frontalface_alt2.xml"
 cascade=cv2.CascadeClassifier(cascade_path)
 
@@ -27,7 +27,7 @@ def capture_camera(scale, crop_face, save_path, num):
             minSize=(100,100)
         )
         img=frame.copy()
-            
+
         if len(facerect)!=0:
             for rect in facerect:
                 org_length=rect[3]/2.
@@ -39,15 +39,15 @@ def capture_camera(scale, crop_face, save_path, num):
                     tuple(face_center+af_length),
                     (0,300,300),
                     thickness=2
-                ) 
-                
+                )
+
                 if crop_face:
                     cv2.imwrite(save_path + datetime.now().strftime("%f%m%d-%H%M%S") +".png", frame[face_center[1]-af_length:face_center[1]+af_length,face_center[0]+af_length:face_center[0]-af_length:-1])
                 else:
                     cv2.imwrite(save_path + datetime.now().strftime("%f%m%d-%H%M%S") +".png", frame[:,::-1])
         cv2.imshow("camera", img[:,::-1])
         k = cv2.waitKey(1) # 1msec待つ
-               
+
         if k == 27: # ESCキーで終了
             break
 
@@ -55,11 +55,12 @@ def capture_camera(scale, crop_face, save_path, num):
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
+    save_path = './images/capture/'
+    os.makedirs(save_path, exist_ok=True)
+
     ### bbox scale
     scale = 1.8
     ### save whole images or cropped images
     crop_face = True
-    save_path = 'images/capture'
     capture_num = 1000
     capture_camera(scale, crop_face, save_path,capture_num)
-
