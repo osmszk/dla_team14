@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */; };
-		C71FAAE01FC3D7D400CC8664 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAADF1FC3D7D400CC8664 /* ViewController.swift */; };
+		C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */; };
 		C71FAAE31FC3D7D400CC8664 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE11FC3D7D400CC8664 /* Main.storyboard */; };
 		C71FAAE51FC3D7D400CC8664 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */; };
 		C71FAAE81FC3D7D400CC8664 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		C71FAADA1FC3D7D400CC8664 /* SmileToCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileToCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C71FAADF1FC3D7D400CC8664 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomoViewController.swift; sourceTree = "<group>"; };
 		C71FAAE21FC3D7D400CC8664 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C71FAAE71FC3D7D400CC8664 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */,
-				C71FAADF1FC3D7D400CC8664 /* ViewController.swift */,
+				C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */,
 				C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */,
 				C71FAAE11FC3D7D400CC8664 /* Main.storyboard */,
 				C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */,
@@ -144,7 +144,7 @@
 			files = (
 				C71FAAF01FC3D8A500CC8664 /* MomoPredict.mlmodel in Sources */,
 				C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */,
-				C71FAAE01FC3D7D400CC8664 /* ViewController.swift in Sources */,
+				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
 				C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
