@@ -20,7 +20,7 @@ def read_data(path):
         path = row[0]
         if not os.path.exists(path):
             continue
-        img = Image.open(path, 'r')
+        img = Image.open(path, 'r').resize((112,112))
         img = np.asarray(img)
         imgs.append(img)
         label = row[1]
