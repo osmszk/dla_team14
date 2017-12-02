@@ -117,4 +117,4 @@ else:
                         validation_data=(X_test, Y_test),
                         callbacks=[csv_logger])
 
-model.save('model.h5')
+model.save('model_member.h5')
