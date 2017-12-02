@@ -45,3 +45,5 @@ test-reports
 *.bk
 *.swp
 
+#ipython notebook
+.ipynb_checkpoints
