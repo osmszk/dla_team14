@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9dm-bU-And">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I2d-L6-e9y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -51,7 +51,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-ta-cpJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="227" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="れに" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="Avs-JN-SSV">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Takemoto" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="Avs-JN-SSV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="l5s-hT-Cgr"/>
@@ -60,11 +60,11 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <progressView opaque="NO" tag="4" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VBY-Ty-c2K">
+                                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VBY-Ty-c2K">
                                                                         <rect key="frame" x="68" y="7" width="118.5" height="2"/>
                                                                         <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </progressView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfM-ZG-dgk">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfM-ZG-dgk">
                                                                         <rect key="frame" x="194.5" y="0.0" width="32.5" height="16"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>
@@ -75,7 +75,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X7T-Tv-Syb">
                                                                 <rect key="frame" x="0.0" y="24" width="227" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="かなこ" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="nk8-pg-5i5">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Taniai" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="nk8-pg-5i5">
                                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="P6E-RP-SSs"/>
@@ -84,10 +84,10 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wtE-h6-hqL">
+                                                                    <progressView opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wtE-h6-hqL">
                                                                         <rect key="frame" x="68" y="7" width="118.5" height="2"/>
                                                                     </progressView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meN-xM-58X">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meN-xM-58X">
                                                                         <rect key="frame" x="194.5" y="0.0" width="32.5" height="16"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>
@@ -99,7 +99,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="clr-gV-pQl">
                                                                 <rect key="frame" x="0.0" y="48" width="227" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="しおりん" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="Awq-K3-bR9">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Suzuki" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="Awq-K3-bR9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="rpm-9B-uPK"/>
@@ -108,11 +108,11 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <progressView opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FeU-Xy-l57">
+                                                                    <progressView opaque="NO" tag="2" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FeU-Xy-l57">
                                                                         <rect key="frame" x="68" y="7" width="118.5" height="2"/>
                                                                         <color key="tintColor" red="0.99942404029999998" green="0.89371785530000003" blue="0.012432554869999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </progressView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-be-aVq">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-be-aVq">
                                                                         <rect key="frame" x="194.5" y="0.0" width="32.5" height="16"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>
@@ -123,7 +123,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbY-Rf-OdU">
                                                                 <rect key="frame" x="0.0" y="72" width="227" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="ももか" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="fwF-Bg-krB">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Unkown1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="fwF-Bg-krB">
                                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="ft0-T3-LDd"/>
@@ -147,7 +147,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Z75-4Y-0LE">
                                                                 <rect key="frame" x="0.0" y="96" width="227" height="16"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="あーりん" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="F8i-dO-xjd">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Unkown2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="50" translatesAutoresizingMaskIntoConstraints="NO" id="F8i-dO-xjd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="i3v-si-YL7"/>
@@ -156,11 +156,11 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <progressView opaque="NO" tag="2" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Je-m3-RWb">
+                                                                    <progressView opaque="NO" tag="4" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Je-m3-RWb">
                                                                         <rect key="frame" x="68" y="7" width="118.5" height="2"/>
                                                                         <color key="tintColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </progressView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnG-91-jWG">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnG-91-jWG">
                                                                         <rect key="frame" x="194.5" y="0.0" width="32.5" height="16"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>

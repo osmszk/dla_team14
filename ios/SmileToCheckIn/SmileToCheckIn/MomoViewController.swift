@@ -40,9 +40,9 @@ class MomoViewController: UIViewController {
     var device: AVCaptureDevice?
     var previewLayer: AVCaptureVideoPreviewLayer?
     var connection : AVCaptureConnection?
-    let inputSize: Float = 112
+    let inputSize: CGFloat = 112
     
-    let momoPredict = MomoPredict()
+    let momoPredict = MemberPredict()
     
     lazy var faceRequest: VNDetectFaceRectanglesRequest = {
         return VNDetectFaceRectanglesRequest(completionHandler: self.vnRequestHandler)
@@ -303,14 +303,15 @@ extension MomoViewController {
             else { fatalError("unexpected result type from VNCoreMLRequest") }
         
         DispatchQueue.main.async {
+            print(observations)
             for ob in observations {
-                print("---------------------------\(ob.identifier):\(ob.confidence)")
+//                print("---------------------------\(ob.identifier):\(ob.confidence)")
                 switch ob.identifier {
-                case "kanako": self.updateLabel(idx: 0, ob: ob)
-                case "shiori": self.updateLabel(idx: 1, ob: ob)
-                case "arin": self.updateLabel(idx: 2, ob: ob)
-                case "momoka": self.updateLabel(idx: 3, ob: ob)
-                case "reni": self.updateLabel(idx: 4, ob: ob)
+                case "takemoto": self.updateLabel(idx: 0, ob: ob)
+                case "taniai": self.updateLabel(idx: 1, ob: ob)
+                case "suzuki": self.updateLabel(idx: 2, ob: ob)
+                case "unknown1": self.updateLabel(idx: 3, ob: ob)
+                case "unknown2": self.updateLabel(idx: 4, ob: ob)
                 default:
                     break
                 }
