@@ -9,8 +9,8 @@ import szk_input
 import sys
 
 batch_size = 32
-nb_classes = 5
-nb_epoch = 100
+nb_classes = 3
+nb_epoch = 200
 data_augmentation = True
 
 szk_input.main()
