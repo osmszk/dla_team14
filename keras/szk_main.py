@@ -8,12 +8,15 @@ from keras.layers.normalization import BatchNormalization
 import szk_input
 import sys
 import numpy as np
+import matplotlib
+# Force matplotlib to not use any Xwindows backend.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
 batch_size = 32
-nb_classes = 3
-nb_epoch = 3 #200
+nb_classes = 3 #ももくろの場合は5
+nb_epoch = 100 #200
 data_augmentation = True
 
 #TODO: for flydhub /outputに出力ファイルパスを設定しないといけない
@@ -22,7 +25,6 @@ output_path = '/output/model_member.h5'
 graph_path = '/output/result_member.png'
 
 img_rows, img_cols = 112, 112
-#ももくろの場合は5
 img_channels = 3
 
 #TODO: for floydhub ./data から /data に変更した。あとでparamで動的にする
