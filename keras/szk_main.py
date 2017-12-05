@@ -16,8 +16,8 @@ import os
 
 batch_size = 32
 nb_classes = 3 #ももくろの場合は5
-nb_epoch = 100 #200
-data_augmentation = True
+nb_epoch = 100
+data_augmentation = False
 
 #TODO: for flydhub /outputに出力ファイルパスを設定しないといけない
 # xx.h5から/output/xx.h5 に変更した。あとでparamで動的にする
