@@ -6,8 +6,9 @@ import os
 from PIL import Image, ImageTk
 
 def main():
-    (X_train, Y_train) = read_data('./data/train/data.txt')
-    (imgs_test, labels_test) = read_data('./data/test/data.txt')
+    #TODO: for floydhub ./data から /data に変更した。あとでparamで動的にする
+    (X_train, Y_train) = read_data('/data/train/data.txt')
+    (imgs_test, labels_test) = read_data('/data/test/data.txt')
     print(X_train.shape)
     print(Y_train.shape)
 
@@ -18,6 +19,8 @@ def read_data(path):
     dataReader = csv.reader(f, delimiter=' ')
     for row in dataReader:
         path = row[0]
+        #TODO: for floydhub ./data から /data に変更した。あとでparamで動的にする
+        path = path[1:]
         if not os.path.exists(path):
             continue
         img = Image.open(path, 'r').resize((112,112))
