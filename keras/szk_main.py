@@ -19,7 +19,7 @@ on_floydhub = True if "-f" in sys.argv else False
 
 batch_size = 128
 nb_classes = 3 #ももくろの場合は5
-nb_epoch = 3
+nb_epoch = 100
 data_augmentation = False
 
 output_path = '/output/model_member.h5' if on_floydhub else './model_member.h5'
