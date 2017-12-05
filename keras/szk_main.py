@@ -7,26 +7,27 @@ from keras.utils import np_utils
 from keras.layers.normalization import BatchNormalization
 import szk_input
 import sys
+import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 batch_size = 32
 nb_classes = 3
-nb_epoch = 200
+nb_epoch = 3 #200
 data_augmentation = True
 
-szk_input.main()
-
-# @MBP touchbar (3.3GHz Core i7, memory 16GB)
-# 1 epoch -> ETA 3300 (55min.?)
-
-# @Google Cloud Platform(vCPU x 8, memory 300GB, Ubuntu 16.04)
-# 1 epoch -> ETA 31:30
-
+#TODO: for flydhub /outputに出力ファイルパスを設定しないといけない
+# xx.h5から/output/xx.h5 に変更した。あとでparamで動的にする
+output_path = '/output/model_member.h5'
+graph_path = '/output/result_member.png'
 
 img_rows, img_cols = 112, 112
+#ももくろの場合は5
 img_channels = 3
 
-(X_train, y_train)= szk_input.read_data('./data/train/data.txt')
-(X_test, y_test)= szk_input.read_data('./data/test/data.txt')
+#TODO: for floydhub ./data から /data に変更した。あとでparamで動的にする
+(X_train, y_train)= szk_input.read_data('/data/train/data.txt')
+(X_test, y_test)= szk_input.read_data('/data/test/data.txt')
 
 print('X_train shape:', X_train.shape)
 print('y_train shape:', y_train.shape)
@@ -34,8 +35,6 @@ print('input shape:',X_train.shape[1:])
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 print(X_train.shape[1:])
-
-# sys.exit()
 
 Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
@@ -117,4 +116,42 @@ else:
                         validation_data=(X_test, Y_test),
                         callbacks=[csv_logger])
 
-model.save('model_member.h5')
+model.save(output_path)
+
+# ----------------------------------------------
+# Some plots
+# ----------------------------------------------
+
+fig, (axL, axR) = plt.subplots(ncols=2, figsize=(10,4))
+
+
+# loss
+def plot_history_loss(fit):
+    # Plot the loss in the history
+    axL.plot(fit.history['loss'],label="loss for training")
+    axL.plot(fit.history['val_loss'],label="loss for validation")
+    axL.set_title('model loss')
+    axL.set_xlabel('epoch')
+    axL.set_ylabel('loss')
+    axL.legend(loc='upper right')
+
+# acc
+def plot_history_acc(fit):
+    # Plot the loss in the history
+    axR.plot(fit.history['acc'],label="accuracy for training")
+    axR.plot(fit.history['val_acc'],label="accuracy for validation")
+    axR.set_title('model accuracy')
+    axR.set_xlabel('epoch')
+    axR.set_ylabel('accuracy')
+    axR.legend(loc='upper right')
+
+plot_history_loss(fit)
+plot_history_acc(fit)
+fig.savefig(graph_path)
+plt.close()
+
+# @MBP touchbar (3.3GHz Core i7, memory 16GB)
+# 1 epoch -> ETA 3300 (55min.?)
+
+# @Google Cloud Platform(vCPU x 8, memory 300GB, Ubuntu 16.04)
+# 1 epoch -> ETA 31:30
