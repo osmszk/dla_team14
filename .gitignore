@@ -48,5 +48,10 @@ test-reports
 #ipython notebook
 .ipynb_checkpoints
 
-#daa
+#data
 data.txt
+
+#floydhub
+.floyddata
+.floydexpt
+.floydignore
