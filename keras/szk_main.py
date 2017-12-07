@@ -16,14 +16,16 @@ import os
 
 # -f floydhubで実行する場合は、`-f`オプションをつける。
 on_floydhub = True if "-f" in sys.argv else False
+# -m ももくろで実行する場合は、`-m`オプションをつける。
+on_momokuro = True if "-m" in sys.argv else False
 
 batch_size = 128
-nb_classes = 3 #ももくろの場合は5
-nb_epoch = 100
+nb_classes = 5 if on_momokuro else 3
+nb_epoch = 50
 data_augmentation = False
 
-output_path = '/output/model_member.h5' if on_floydhub else './model_member.h5'
-graph_path = '/output/result_member.png' if on_floydhub else './result_member.png'
+output_path = '/output/model.h5' if on_floydhub else './model.h5'
+graph_path = '/output/result.png' if on_floydhub else './result.png'
 train_data_path = '/data/train/data.txt' if on_floydhub else './data/train/data.txt'
 test_data_path = '/data/test/data.txt' if on_floydhub else './data/test/data.txt'
 
