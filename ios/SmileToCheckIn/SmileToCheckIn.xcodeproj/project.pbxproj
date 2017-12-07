@@ -8,24 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */; };
-		C71FAAE01FC3D7D400CC8664 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAADF1FC3D7D400CC8664 /* ViewController.swift */; };
+		C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */; };
 		C71FAAE31FC3D7D400CC8664 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE11FC3D7D400CC8664 /* Main.storyboard */; };
 		C71FAAE51FC3D7D400CC8664 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */; };
 		C71FAAE81FC3D7D400CC8664 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */; };
 		C71FAAF01FC3D8A500CC8664 /* MomoPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */; };
 		C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */; };
+		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
+		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
+		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
+		C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C61FD29643009EC847 /* FPSCounter.swift */; };
+		C7CFF3C91FD3F272009EC847 /* MemberPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C81FD3F271009EC847 /* MemberPredict.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C71FAADA1FC3D7D400CC8664 /* SmileToCheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileToCheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C71FAADF1FC3D7D400CC8664 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomoViewController.swift; sourceTree = "<group>"; };
 		C71FAAE21FC3D7D400CC8664 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C71FAAE71FC3D7D400CC8664 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C71FAAE91FC3D7D400CC8664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MomoPredict.mlmodel; sourceTree = "<group>"; };
 		C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
+		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
+		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		C7CFF3C61FD29643009EC847 /* FPSCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSCounter.swift; sourceTree = "<group>"; };
+		C7CFF3C81FD3F271009EC847 /* MemberPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MemberPredict.mlmodel; path = ../../../coreml/MemberPredict.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +69,17 @@
 			isa = PBXGroup;
 			children = (
 				C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */,
-				C71FAADF1FC3D7D400CC8664 /* ViewController.swift */,
+				C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */,
+				C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */,
 				C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */,
 				C71FAAE11FC3D7D400CC8664 /* Main.storyboard */,
+				C7CFF3C21FD28474009EC847 /* VideoCapture.swift */,
+				C7CFF3C41FD28579009EC847 /* BoundingBox.swift */,
+				C7CFF3C61FD29643009EC847 /* FPSCounter.swift */,
 				C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */,
 				C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */,
 				C71FAAE91FC3D7D400CC8664 /* Info.plist */,
+				C7CFF3C81FD3F271009EC847 /* MemberPredict.mlmodel */,
 				C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */,
 			);
 			path = SmileToCheckIn;
@@ -143,8 +158,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C71FAAF01FC3D8A500CC8664 /* MomoPredict.mlmodel in Sources */,
+				C7CFF3C91FD3F272009EC847 /* MemberPredict.mlmodel in Sources */,
 				C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */,
-				C71FAAE01FC3D7D400CC8664 /* ViewController.swift in Sources */,
+				C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */,
+				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
+				C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */,
+				C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */,
+				C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */,
 				C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

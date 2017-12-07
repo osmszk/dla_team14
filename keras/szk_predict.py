@@ -19,7 +19,7 @@ def predict(input_path):
     nb_classes = 5
     Y_test = np_utils.to_categorical(y_test, nb_classes)
 
-    model = load_model('model.h5')
+    model = load_model('model_member.h5')
     res = model.predict(X_test)
 
     acts = [np.argmax(i) for i in res]

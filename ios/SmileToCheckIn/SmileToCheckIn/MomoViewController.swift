@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MomoViewController.swift
 //  SmileToCheckIn
 //
 //  Created by 鈴木治 on 2017/11/21.
@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Vision
 
-class ViewController: UIViewController {
+class MomoViewController: UIViewController {
     
     @IBOutlet weak var overlayView: OverlayView!
     @IBOutlet weak var facePreview: UIImageView!
@@ -40,9 +40,9 @@ class ViewController: UIViewController {
     var device: AVCaptureDevice?
     var previewLayer: AVCaptureVideoPreviewLayer?
     var connection : AVCaptureConnection?
-    let inputSize: Float = 112
+    let inputSize: CGFloat = 112
     
-    let momoPredict = MomoPredict()
+    let momoPredict = MemberPredict()
     
     lazy var faceRequest: VNDetectFaceRectanglesRequest = {
         return VNDetectFaceRectanglesRequest(completionHandler: self.vnRequestHandler)
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
 
 //MARK: - setup video
 
-extension ViewController {
+extension MomoViewController {
     
     private var isActualDevice: Bool {
         return TARGET_OS_SIMULATOR != 1
@@ -164,7 +164,7 @@ extension ViewController {
 
 //MARK: - Video Capture
 
-extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension MomoViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if connection.videoOrientation != .portrait {
@@ -193,7 +193,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 //MARK: - Face detection
 
-extension ViewController {
+extension MomoViewController {
     
     func vnRequestHandler(request: VNRequest, error: Error?) {
         if let e = error {
@@ -281,7 +281,7 @@ extension ViewController {
 
 //MARK: - Predicate
 
-extension ViewController {
+extension MomoViewController {
     
     fileprivate func predicate(cgImage: CGImage) {
         let image = CIImage(cgImage: cgImage)
@@ -303,14 +303,15 @@ extension ViewController {
             else { fatalError("unexpected result type from VNCoreMLRequest") }
         
         DispatchQueue.main.async {
+            print(observations)
             for ob in observations {
-                print("---------------------------\(ob.identifier):\(ob.confidence)")
+//                print("---------------------------\(ob.identifier):\(ob.confidence)")
                 switch ob.identifier {
-                case "kanako": self.updateLabel(idx: 0, ob: ob)
-                case "shiori": self.updateLabel(idx: 1, ob: ob)
-                case "arin": self.updateLabel(idx: 2, ob: ob)
-                case "momoka": self.updateLabel(idx: 3, ob: ob)
-                case "reni": self.updateLabel(idx: 4, ob: ob)
+                case "takemoto": self.updateLabel(idx: 0, ob: ob)
+                case "taniai": self.updateLabel(idx: 1, ob: ob)
+                case "suzuki": self.updateLabel(idx: 2, ob: ob)
+                case "unknown1": self.updateLabel(idx: 3, ob: ob)
+                case "unknown2": self.updateLabel(idx: 4, ob: ob)
                 default:
                     break
                 }

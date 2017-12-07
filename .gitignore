@@ -45,3 +45,12 @@ test-reports
 *.bk
 *.swp
 
+#ipython notebook
+.ipynb_checkpoints
+
+#data
+data.txt
+
+#floydhub
+.floyddata
+.floydexpt
