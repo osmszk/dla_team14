@@ -16,6 +16,7 @@
 		C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */; };
 		C72C6EF31FE4DA08005F8C0B /* MemberPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */; };
 		C72C6EF51FE4DCB9005F8C0B /* OpenFace.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */; };
+		C72C6EF71FE4DDAD005F8C0B /* OpenFaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF61FE4DDAD005F8C0B /* OpenFaceViewController.swift */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
@@ -34,6 +35,7 @@
 		C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MemberPredict.mlmodel; sourceTree = "<group>"; };
 		C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = OpenFace.mlmodel; sourceTree = "<group>"; };
+		C72C6EF61FE4DDAD005F8C0B /* OpenFaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFaceViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				C71FAADD1FC3D7D400CC8664 /* AppDelegate.swift */,
 				C71FAADF1FC3D7D400CC8664 /* MomoViewController.swift */,
 				C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */,
+				C72C6EF61FE4DDAD005F8C0B /* OpenFaceViewController.swift */,
 				C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */,
 				C71FAAE11FC3D7D400CC8664 /* Main.storyboard */,
 				C7CFF3C21FD28474009EC847 /* VideoCapture.swift */,
@@ -170,6 +173,7 @@
 				C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */,
 				C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */,
 				C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */,
+				C72C6EF71FE4DDAD005F8C0B /* OpenFaceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

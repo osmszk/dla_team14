@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I2d-L6-e9y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m8N-x5-q8Z">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -278,6 +278,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qi9-TC-Prf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="774" y="141"/>
+        </scene>
+        <!--Open Face View Controller-->
+        <scene sceneID="0V7-ot-HKG">
+            <objects>
+                <viewController storyboardIdentifier="OpenFaceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m8N-x5-q8Z" customClass="OpenFaceViewController" customModule="SmileToCheckIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3D9-Bm-I7s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MeF-2k-zb3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MeF-2k-zb3" firstAttribute="trailing" secondItem="EPu-VP-dsd" secondAttribute="trailing" id="TwG-Bc-ro0"/>
+                            <constraint firstItem="MeF-2k-zb3" firstAttribute="leading" secondItem="EPu-VP-dsd" secondAttribute="leading" id="nOi-GG-mgs"/>
+                            <constraint firstItem="MeF-2k-zb3" firstAttribute="bottom" secondItem="EPu-VP-dsd" secondAttribute="bottom" id="rqN-Zb-Ztd"/>
+                            <constraint firstItem="MeF-2k-zb3" firstAttribute="top" secondItem="3D9-Bm-I7s" secondAttribute="top" id="z3r-Lq-ChJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EPu-VP-dsd"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="MeF-2k-zb3" id="EqJ-qz-Fb3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bdE-yS-pLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1501.5999999999999" y="139.880059970015"/>
         </scene>
     </scenes>
 </document>
