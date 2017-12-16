@@ -17,6 +17,9 @@
 		C72C6EF31FE4DA08005F8C0B /* MemberPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */; };
 		C72C6EF51FE4DCB9005F8C0B /* OpenFace.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */; };
 		C72C6EF71FE4DDAD005F8C0B /* OpenFaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF61FE4DDAD005F8C0B /* OpenFaceViewController.swift */; };
+		C72C6EF91FE4E156005F8C0B /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF81FE4E156005F8C0B /* CVPixelBuffer+Helpers.swift */; };
+		C72C6EFC1FE4E3B6005F8C0B /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EFA1FE4E3B6005F8C0B /* Matrix.swift */; };
+		C72C6EFD1FE4E3B6005F8C0B /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EFB1FE4E3B6005F8C0B /* MultiArray.swift */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
@@ -36,6 +39,9 @@
 		C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MemberPredict.mlmodel; sourceTree = "<group>"; };
 		C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = OpenFace.mlmodel; sourceTree = "<group>"; };
 		C72C6EF61FE4DDAD005F8C0B /* OpenFaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFaceViewController.swift; sourceTree = "<group>"; };
+		C72C6EF81FE4E156005F8C0B /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
+		C72C6EFA1FE4E3B6005F8C0B /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		C72C6EFB1FE4E3B6005F8C0B /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -81,6 +87,9 @@
 				C7CFF3C21FD28474009EC847 /* VideoCapture.swift */,
 				C7CFF3C41FD28579009EC847 /* BoundingBox.swift */,
 				C7CFF3C61FD29643009EC847 /* FPSCounter.swift */,
+				C72C6EF81FE4E156005F8C0B /* CVPixelBuffer+Helpers.swift */,
+				C72C6EFA1FE4E3B6005F8C0B /* Matrix.swift */,
+				C72C6EFB1FE4E3B6005F8C0B /* MultiArray.swift */,
 				C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */,
 				C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */,
 				C71FAAE91FC3D7D400CC8664 /* Info.plist */,
@@ -166,12 +175,15 @@
 				C71FAAF01FC3D8A500CC8664 /* MomoPredict.mlmodel in Sources */,
 				C72C6EF31FE4DA08005F8C0B /* MemberPredict.mlmodel in Sources */,
 				C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */,
+				C72C6EFD1FE4E3B6005F8C0B /* MultiArray.swift in Sources */,
+				C72C6EFC1FE4E3B6005F8C0B /* Matrix.swift in Sources */,
 				C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */,
 				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
 				C72C6EF51FE4DCB9005F8C0B /* OpenFace.mlmodel in Sources */,
 				C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */,
 				C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */,
 				C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */,
+				C72C6EF91FE4E156005F8C0B /* CVPixelBuffer+Helpers.swift in Sources */,
 				C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */,
 				C72C6EF71FE4DDAD005F8C0B /* OpenFaceViewController.swift in Sources */,
 			);
