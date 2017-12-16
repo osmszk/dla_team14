@@ -41,7 +41,8 @@ class OpenFaceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print(NSHomeDirectory())
         
         let image = #imageLiteral(resourceName: "carell")
         self.imageView.image = image
@@ -80,34 +81,73 @@ class OpenFaceViewController: UIViewController {
             }
         }
         
-        if (self.shouldGemEmbedding % 2 == 0) {
-            self.shouldGemEmbedding = 1
-            self.currentLabelRect = []
-        } else {
-            self.shouldGemEmbedding = self.shouldGemEmbedding + 1
-            return
-        }
-//        let cropAndResizeFaceQueue = DispatchQueue(label: "com.wangderland.cropAndResizeQueue", qos: .userInteractive)
-//        for region in observations {
-//            cropAndResizeFaceQueue.async {
-//                guard let pixelBuffer = self.currentPixelBuffer else { return }
-//                let boundingRect = region.boundingBox
-//                let x = boundingRect.minX * CGFloat(CVPixelBufferGetWidth(pixelBuffer))
-//                let w = boundingRect.width * CGFloat(CVPixelBufferGetWidth(pixelBuffer))
-//                let h = boundingRect.height * CGFloat(CVPixelBufferGetHeight(pixelBuffer))
-//                let y = CGFloat(CVPixelBufferGetHeight(pixelBuffer)) * (1 - boundingRect.minY) - h
-//                let scaledRect = CGRect(x: x, y: y, width: w, height: h)
-//                guard let croppedPixelBuffer = self.cropFace(imageBuffer: pixelBuffer, region: scaledRect) else { return }
-//                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
-//                do {
-//                    let scaledRect = self.scale(rect: boundingRect, view: self.preview)
-//                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
-//                    try MLRequestHandler.perform([self.MLRequest])
-//                } catch {
-//                    print(error)
-//                }
-//            }
+//        if (self.shouldGemEmbedding % 2 == 0) {
+//            self.shouldGemEmbedding = 1
+//            self.currentLabelRect = []
+//        } else {
+//            self.shouldGemEmbedding = self.shouldGemEmbedding + 1
+//            return
 //        }
+        let cropAndResizeFaceQueue = DispatchQueue(label: "osuzuki.SmileToCheckIn", qos: .userInteractive)
+        for region in observations {
+            cropAndResizeFaceQueue.async {
+                guard let pixelBuffer = self.currentPixelBuffer else { return }
+                let boundingRect = region.boundingBox
+                let x = boundingRect.minX * CGFloat(CVPixelBufferGetWidth(pixelBuffer))
+                let w = boundingRect.width * CGFloat(CVPixelBufferGetWidth(pixelBuffer))
+                let h = boundingRect.height * CGFloat(CVPixelBufferGetHeight(pixelBuffer))
+                let y = CGFloat(CVPixelBufferGetHeight(pixelBuffer)) * (1 - boundingRect.minY) - h
+                let scaledRect = CGRect(x: x, y: y, width: w, height: h)
+                print("boundingRect:\(boundingRect) scaledRect:\(scaledRect)")
+//                self.showImageAsTest(name: "currentPixelBuffer", pixelBuffer: pixelBuffer)
+                guard let croppedPixelBuffer = self.cropFace(imageBuffer: pixelBuffer, region: scaledRect) else { return }
+//                self.showImageAsTest(name: "croppedPixelBuffer", pixelBuffer: croppedPixelBuffer)
+                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
+                do {
+//                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
+//                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
+                    try MLRequestHandler.perform([self.MLRequest])
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    func showImageAsTest(name: String, pixelBuffer: CVPixelBuffer) {
+        DispatchQueue.main.async {
+            if let image = UIImage(pixelBuffer: pixelBuffer) {
+                print("showImageAsTest size:\(image.size)")
+                let imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: image.size))
+                imageView.image = image
+                self.view.addSubview(imageView)
+            }
+        }
+    }
+    
+    func cropFace(imageBuffer: CVPixelBuffer, region: CGRect) -> CVPixelBuffer? {
+        CVPixelBufferLockBaseAddress(imageBuffer, .readOnly)
+        let baseAddress = CVPixelBufferGetBaseAddress(imageBuffer)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer)
+        // calculate start position
+        let bytesPerPixel = 4
+        let startAddress = baseAddress?.advanced(by: Int(region.minY) * bytesPerRow + Int(region.minX) * bytesPerPixel)
+        var croppedImageBuffer: CVPixelBuffer?
+        let status = CVPixelBufferCreateWithBytes(kCFAllocatorDefault,
+                                                  Int(region.width),
+                                                  Int(region.height),
+                                                  kCVPixelFormatType_32BGRA,
+                                                  startAddress!,
+                                                  bytesPerRow,
+                                                  nil,
+                                                  nil,
+                                                  nil,
+                                                  &croppedImageBuffer)
+        CVPixelBufferUnlockBaseAddress(imageBuffer, .readOnly)
+        if (status != 0) {
+            print("CVPixelBufferCreate Error: ", status)
+        }
+        return croppedImageBuffer
     }
     
     func highlightFace(faceObservation: VNFaceObservation) {
