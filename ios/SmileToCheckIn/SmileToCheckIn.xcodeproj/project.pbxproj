@@ -14,11 +14,11 @@
 		C71FAAE81FC3D7D400CC8664 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */; };
 		C71FAAF01FC3D8A500CC8664 /* MomoPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */; };
 		C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */; };
+		C72C6EF31FE4DA08005F8C0B /* MemberPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
 		C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C61FD29643009EC847 /* FPSCounter.swift */; };
-		C7CFF3C91FD3F272009EC847 /* MemberPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C81FD3F271009EC847 /* MemberPredict.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,11 +31,11 @@
 		C71FAAE91FC3D7D400CC8664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MomoPredict.mlmodel; sourceTree = "<group>"; };
 		C71FAAF11FC3D90C00CC8664 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MemberPredict.mlmodel; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		C7CFF3C61FD29643009EC847 /* FPSCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSCounter.swift; sourceTree = "<group>"; };
-		C7CFF3C81FD3F271009EC847 /* MemberPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MemberPredict.mlmodel; path = ../../../coreml/MemberPredict.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,7 @@
 				C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */,
 				C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */,
 				C71FAAE91FC3D7D400CC8664 /* Info.plist */,
-				C7CFF3C81FD3F271009EC847 /* MemberPredict.mlmodel */,
+				C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */,
 				C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */,
 			);
 			path = SmileToCheckIn;
@@ -158,7 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C71FAAF01FC3D8A500CC8664 /* MomoPredict.mlmodel in Sources */,
-				C7CFF3C91FD3F272009EC847 /* MemberPredict.mlmodel in Sources */,
+				C72C6EF31FE4DA08005F8C0B /* MemberPredict.mlmodel in Sources */,
 				C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */,
 				C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */,
 				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
