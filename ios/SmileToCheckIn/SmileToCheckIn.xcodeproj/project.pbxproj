@@ -22,6 +22,10 @@
 		C72C6EFD1FE4E3B6005F8C0B /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EFB1FE4E3B6005F8C0B /* MultiArray.swift */; };
 		C72C6EFF1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C6EFE1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift */; };
 		C72C6F011FE5044B005F8C0B /* clapton1.csv in Resources */ = {isa = PBXBuildFile; fileRef = C72C6F001FE5044B005F8C0B /* clapton1.csv */; };
+		C72C6F051FE5237D005F8C0B /* clapton1_openface.csv in Resources */ = {isa = PBXBuildFile; fileRef = C72C6F041FE5237D005F8C0B /* clapton1_openface.csv */; };
+		C72C6F071FE52476005F8C0B /* clapton2_openface.csv in Resources */ = {isa = PBXBuildFile; fileRef = C72C6F061FE52476005F8C0B /* clapton2_openface.csv */; };
+		C72C6F091FE52557005F8C0B /* carell_openface.csv in Resources */ = {isa = PBXBuildFile; fileRef = C72C6F081FE52557005F8C0B /* carell_openface.csv */; };
+		C72C6F0B1FE5601E005F8C0B /* lennon2.csv in Resources */ = {isa = PBXBuildFile; fileRef = C72C6F0A1FE5601E005F8C0B /* lennon2.csv */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
@@ -46,6 +50,10 @@
 		C72C6EFB1FE4E3B6005F8C0B /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
 		C72C6EFE1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 		C72C6F001FE5044B005F8C0B /* clapton1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clapton1.csv; sourceTree = "<group>"; };
+		C72C6F041FE5237D005F8C0B /* clapton1_openface.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clapton1_openface.csv; sourceTree = "<group>"; };
+		C72C6F061FE52476005F8C0B /* clapton2_openface.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = clapton2_openface.csv; sourceTree = "<group>"; };
+		C72C6F081FE52557005F8C0B /* carell_openface.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = carell_openface.csv; sourceTree = "<group>"; };
+		C72C6F0A1FE5601E005F8C0B /* lennon2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lennon2.csv; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -102,6 +110,10 @@
 				C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */,
 				C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */,
 				C72C6F001FE5044B005F8C0B /* clapton1.csv */,
+				C72C6F0A1FE5601E005F8C0B /* lennon2.csv */,
+				C72C6F041FE5237D005F8C0B /* clapton1_openface.csv */,
+				C72C6F061FE52476005F8C0B /* clapton2_openface.csv */,
+				C72C6F081FE52557005F8C0B /* carell_openface.csv */,
 			);
 			path = SmileToCheckIn;
 			sourceTree = "<group>";
@@ -165,9 +177,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72C6F051FE5237D005F8C0B /* clapton1_openface.csv in Resources */,
+				C72C6F0B1FE5601E005F8C0B /* lennon2.csv in Resources */,
+				C72C6F091FE52557005F8C0B /* carell_openface.csv in Resources */,
 				C72C6F011FE5044B005F8C0B /* clapton1.csv in Resources */,
 				C71FAAE81FC3D7D400CC8664 /* LaunchScreen.storyboard in Resources */,
 				C71FAAE51FC3D7D400CC8664 /* Assets.xcassets in Resources */,
+				C72C6F071FE52476005F8C0B /* clapton2_openface.csv in Resources */,
 				C71FAAE31FC3D7D400CC8664 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

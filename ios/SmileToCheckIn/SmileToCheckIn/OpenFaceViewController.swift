@@ -39,6 +39,26 @@ class OpenFaceViewController: UIViewController {
         }
     }()
     
+    lazy var image: UIImage = {
+        let image = #imageLiteral(resourceName: "clapton-2")
+        //#imageLiteral(resourceName: "clapton-1")
+        //#imageLiteral(resourceName: "clapton-2")
+        //#imageLiteral(resourceName: "lennon-2")
+        
+        let newWidth:CGFloat = 96
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), true, 3.0)
+        image.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }()
+    let csvName: String = "lennon2"
+    //clapton-1
+    //lennon-2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,13 +66,13 @@ class OpenFaceViewController: UIViewController {
         
         readDataFromCSV()
         
-        let image = #imageLiteral(resourceName: "clapton-2")
+        let image = self.image
         self.imageView.image = image
         
         startFaceDetection()
         
         //UIImage -> CVPixelBuffer
-        let pixelBuffer = pixelBufferFromImage(image: image)
+        let pixelBuffer = pixelBufferFromImage(image: self.image)
         let requestOptions:[VNImageOption : Any] = [:]
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
         do {
@@ -102,6 +122,8 @@ class OpenFaceViewController: UIViewController {
                 let scaledRect = CGRect(x: x, y: y, width: w, height: h)
                 print("boundingRect:\(boundingRect) scaledRect:\(scaledRect)")
                 guard let croppedPixelBuffer = self.cropFace(imageBuffer: pixelBuffer, region: scaledRect) else { return }
+//                self.showImageAsTest(name: "croppedPixelBuffer", pixelBuffer: croppedPixelBuffer)
+                
                 let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
@@ -193,22 +215,30 @@ class OpenFaceViewController: UIViewController {
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
             guard let repsMatrix = self.repsMatrix else { return }
-            print("repsMatrix")
+            print("repsMatrix \(self.csvName)")
             print(repsMatrix.description)
             let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: repsMatrix.rows))
             print("embMatrix")
             print(embMatrix.description)
-            let result = mul(embMatrix, y: transpose(repsMatrix))
-            print("clapton1(CSV) と clapton2(画像)の内積は :")
-            print(result.description)
-            print(result[0,0])
+            
+            let diff = repsMatrix - embMatrix
+            let result2 = mul(diff, y: transpose(diff))
+            print(result2.description)
+            
+            print("diff")
+            let squredDiff = myPow(diff, 2)
+            print(squredDiff.description)
+            let l2 = sum(squredDiff, axies:.row)
+            print("squared L2 distance !!!!")
+            print(l2.description)
+            
             
         }
     }
     
     func readDataFromCSV() {
         
-        guard let repsPath = Bundle.main.path(forResource: "clapton1", ofType: "csv") else { return }
+        guard let repsPath = Bundle.main.path(forResource: self.csvName, ofType: "csv") else { return }
         
         let reps = try! String(contentsOfFile: repsPath, encoding: String.Encoding.utf8)
         
