@@ -44,7 +44,9 @@ class OpenFaceViewController: UIViewController {
         
         print(NSHomeDirectory())
         
-        let image = #imageLiteral(resourceName: "carell")
+        readDataFromCSV()
+        
+        let image = #imageLiteral(resourceName: "clapton-2")
         self.imageView.image = image
         
         startFaceDetection()
@@ -99,9 +101,7 @@ class OpenFaceViewController: UIViewController {
                 let y = CGFloat(CVPixelBufferGetHeight(pixelBuffer)) * (1 - boundingRect.minY) - h
                 let scaledRect = CGRect(x: x, y: y, width: w, height: h)
                 print("boundingRect:\(boundingRect) scaledRect:\(scaledRect)")
-//                self.showImageAsTest(name: "currentPixelBuffer", pixelBuffer: pixelBuffer)
                 guard let croppedPixelBuffer = self.cropFace(imageBuffer: pixelBuffer, region: scaledRect) else { return }
-//                self.showImageAsTest(name: "croppedPixelBuffer", pixelBuffer: croppedPixelBuffer)
                 let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
@@ -190,25 +190,46 @@ class OpenFaceViewController: UIViewController {
             print(emb)
             let doubleValueEmb = buffer2Array(length: emb.count, data: emb.dataPointer, Double.self)
             print(doubleValueEmb)
+//            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
-//            guard let repsMatrix = self.repsMatrix else { return }
-//            let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: repsMatrix.rows))
-//            let diff = repsMatrix - embMatrix
-//            let squredDiff = myPow(diff, 2)
-//            let l2 = sum(squredDiff, axies:.row)
-//            let grid = l2.grid
-//            let minVal = l2.grid.min()
-//            var ans: String = "Unknown"
-//            guard let minIdx = l2.grid.index(of: minVal!) else { return }
-//
-//
-//
-//            self.end = CACurrentMediaTime()
-//            print("name: \(ans), distance: \(minVal ?? nil)")
-//            print("Gem time", self.end - self.start)
-            
+            guard let repsMatrix = self.repsMatrix else { return }
+            print("repsMatrix")
+            print(repsMatrix.description)
+            let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: repsMatrix.rows))
+            print("embMatrix")
+            print(embMatrix.description)
+            let result = mul(embMatrix, y: transpose(repsMatrix))
+            print("clapton1(CSV) と clapton2(画像)の内積は :")
+            print(result.description)
+            print(result[0,0])
             
         }
+    }
+    
+    func readDataFromCSV() {
+        
+        guard let repsPath = Bundle.main.path(forResource: "clapton1", ofType: "csv") else { return }
+        
+        let reps = try! String(contentsOfFile: repsPath, encoding: String.Encoding.utf8)
+        
+        self.start = CACurrentMediaTime()
+        let repsArray: [[Double]] = reps
+            .components(separatedBy: "\r")
+            .filter{ $0.count > 0 }
+            .map{
+                //                print($0.components(separatedBy: ","))
+                return $0.replacingOccurrences(of: " ", with: "").components(separatedBy: ",").map{ Double($0)! }
+        }
+        print("Done Reps")
+        let repsMatrix = Matrix(repsArray)
+        
+        self.repsMatrix = repsMatrix
+        print("rows:\(repsMatrix.rows)")
+        print("columns:\(repsMatrix.columns)")
+        print("grid count:\(repsMatrix.grid.count)  valu:\(repsMatrix.grid) ")
+        
+        self.end = CACurrentMediaTime()
+        print("Done Import data:", self.end - self.start)
     }
 
 }
