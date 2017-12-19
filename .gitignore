@@ -62,3 +62,6 @@ data.txt
 
 #numpy
 *.npy
+
+#vertualenv
+coreml/member2_env/*
