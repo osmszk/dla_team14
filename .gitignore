@@ -54,3 +54,11 @@ data.txt
 #floydhub
 .floyddata
 .floydexpt
+
+#tensorflow
+*.pd
+*.pb
+*.meta
+
+#numpy
+*.npy
