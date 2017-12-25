@@ -54,3 +54,14 @@ data.txt
 #floydhub
 .floyddata
 .floydexpt
+
+#tensorflow
+*.pd
+*.pb
+*.meta
+
+#numpy
+*.npy
+
+#vertualenv
+coreml/member2_env/*
