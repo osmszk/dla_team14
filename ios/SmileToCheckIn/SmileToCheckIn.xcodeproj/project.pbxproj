@@ -30,6 +30,8 @@
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
 		C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C61FD29643009EC847 /* FPSCounter.swift */; };
+		C7F1E2E61FF0F04300D32497 /* scaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F1E2E51FF0F04300D32497 /* scaling.swift */; };
+		C7F1E2E81FF0FB4C00D32497 /* FaceNetModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		C7CFF3C61FD29643009EC847 /* FPSCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSCounter.swift; sourceTree = "<group>"; };
+		C7F1E2E51FF0F04300D32497 /* scaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scaling.swift; sourceTree = "<group>"; };
+		C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FaceNetModel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */,
 				C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */,
 				C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */,
+				C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */,
+				C7F1E2E51FF0F04300D32497 /* scaling.swift */,
 				C72C6F001FE5044B005F8C0B /* clapton1.csv */,
 				C72C6F0A1FE5601E005F8C0B /* lennon2.csv */,
 				C72C6F041FE5237D005F8C0B /* clapton1_openface.csv */,
@@ -204,6 +210,8 @@
 				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
 				C72C6EFF1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift in Sources */,
 				C72C6EF51FE4DCB9005F8C0B /* OpenFace.mlmodel in Sources */,
+				C7F1E2E61FF0F04300D32497 /* scaling.swift in Sources */,
+				C7F1E2E81FF0FB4C00D32497 /* FaceNetModel.mlmodel in Sources */,
 				C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */,
 				C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */,
 				C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */,
@@ -283,7 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -334,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -349,6 +357,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EV6MDECWF6;
 				INFOPLIST_FILE = SmileToCheckIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = osuzuki.SmileToCheckIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -364,6 +373,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EV6MDECWF6;
 				INFOPLIST_FILE = SmileToCheckIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = osuzuki.SmileToCheckIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";

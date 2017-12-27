@@ -12,11 +12,12 @@ import AVFoundation
 import Vision
 import Accelerate
 
+@available(iOS 11.2, *)
 class OpenFaceViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    var model: OpenFace!
+    var model: FaceNetModel!
     var session = AVCaptureSession()
     var requests = [VNRequest]()
     var currentPixelBuffer: CVPixelBuffer?
@@ -32,7 +33,7 @@ class OpenFaceViewController: UIViewController {
     lazy var MLRequest: VNCoreMLRequest = {
         // Load the ML model through its generated class and create a Vision request for it.
         do {
-            let model = try VNCoreMLModel(for: OpenFace().model)
+            let model = try VNCoreMLModel(for: FaceNetModel().model)
             return VNCoreMLRequest(model: model, completionHandler: self.genEmbeddingsHandler)
         } catch {
             fatalError("can't load Vision ML model: \(error)")
@@ -45,7 +46,7 @@ class OpenFaceViewController: UIViewController {
         //#imageLiteral(resourceName: "clapton-2")
         //#imageLiteral(resourceName: "lennon-2")
         
-        let newWidth:CGFloat = 96
+        let newWidth:CGFloat = 160
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), true, 3.0)
@@ -56,8 +57,8 @@ class OpenFaceViewController: UIViewController {
         return newImage!
     }()
     let csvName: String = "lennon2"
-    //clapton-1
-    //lennon-2
+    //clapton1
+    //lennon2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,9 +210,9 @@ class OpenFaceViewController: UIViewController {
         observations.forEach { observe in
             self.start = CACurrentMediaTime()
             guard let emb = observe.featureValue.multiArrayValue else { return }
-            print(emb)
+//            print(emb)
             let doubleValueEmb = buffer2Array(length: emb.count, data: emb.dataPointer, Double.self)
-            print(doubleValueEmb)
+//            print(doubleValueEmb)
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
             guard let repsMatrix = self.repsMatrix else { return }
@@ -222,12 +223,12 @@ class OpenFaceViewController: UIViewController {
             print(embMatrix.description)
             
             let diff = repsMatrix - embMatrix
-            let result2 = mul(diff, y: transpose(diff))
-            print(result2.description)
+//            let result2 = mul(diff, y: transpose(diff))
+//            print(result2.description)
             
             print("diff")
             let squredDiff = myPow(diff, 2)
-            print(squredDiff.description)
+//            print(squredDiff.description)
             let l2 = sum(squredDiff, axies:.row)
             print("squared L2 distance !!!!")
             print(l2.description)
