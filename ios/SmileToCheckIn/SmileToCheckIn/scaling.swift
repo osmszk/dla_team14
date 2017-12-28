@@ -11,13 +11,21 @@ import CoreML
 import Accelerate
 
 @objc(scaling) class scaling: NSObject, MLCustomLayer {
+    
+    let scale: Float
+    
     required init(parameters: [String : Any]) throws {
-        print(#function, parameters)
+        if let scale = parameters["scale"] as? Float {
+            self.scale = scale
+        } else {
+            self.scale = 1.0
+        }
+//        print(#function, parameters, self.scale)
         super.init()
     }
     
     func setWeightData(_ weights: [Data]) throws {
-        print(#function, weights)
+//        print(#function, weights)
         
         // This layer does not have any learned weights. However, in the conversion
         // script we added some (random) weights anyway, just to see how this works.
@@ -33,25 +41,30 @@ import Accelerate
     
     func evaluate(inputs: [MLMultiArray], outputs: [MLMultiArray]) throws {
 //        print(#function, inputs.count, outputs.count)
-        print(#function, inputs[0].shape, outputs[0].shape)
-        print(inputs[0], outputs[0])
-        //TODO: fix
+//        print(#function, inputs[0].shape, outputs[0].shape)
+//        print(inputs[0], outputs[0])
         
-//        for i in 0..<inputs.count {
-//            let input = inputs[i]
-//            let output = outputs[i]
-//            // NOTE: In a real app, you might need to handle different datatypes.
-//            // We only support 32-bit floats for now.
-//            assert(input.dataType == .float32)
-//            assert(output.dataType == .float32)
-//            assert(input.shape == output.shape)
-//
-//            for j in 0..<input.count {
-//                let x = input[j].floatValue
-//                let y = x / (1 + exp(-x))
-//                output[j] = NSNumber(value: y)
-//            }
-//        }
-        
+        for i in 0..<inputs.count {
+            let input = inputs[i]
+            let output = outputs[i]
+            // NOTE: In a real app, you might need to handle different datatypes.
+            // We only support 32-bit floats for now.
+            assert(input.dataType == .float32)
+            assert(output.dataType == .float32)
+            assert(input.shape == output.shape)
+
+            for j in 0..<input.count {
+                let x = input[j].floatValue
+                let y = x * self.scale
+                output[j] = NSNumber(value: y)
+            }
+            
+            //faster
+//            let count = input.count
+//            let inputPointer = UnsafeMutablePointer<Float>(OpaquePointer(input.dataPointer))
+//            let outputPointer = UnsafeMutablePointer<Float>(OpaquePointer(output.dataPointer))
+//            var scale = self.scale
+//            vDSP_vsmul(inputPointer, 1, &scale, outputPointer, 1, vDSP_Length(count))
+        }
     }
 }

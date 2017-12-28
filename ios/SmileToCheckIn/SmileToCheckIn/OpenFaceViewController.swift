@@ -29,35 +29,34 @@ class OpenFaceViewController: UIViewController {
     var start = CACurrentMediaTime()
     var end = CACurrentMediaTime()
     
-    
-    lazy var MLRequest: VNCoreMLRequest = {
+    lazy var mlRequest: VNCoreMLRequest = {
         // Load the ML model through its generated class and create a Vision request for it.
         do {
-            let model = try VNCoreMLModel(for: FaceNetModel().model)
+            let model = try VNCoreMLModel(for: FaceNet2().model)
             return VNCoreMLRequest(model: model, completionHandler: self.genEmbeddingsHandler)
         } catch {
             fatalError("can't load Vision ML model: \(error)")
         }
     }()
     
-    lazy var image: UIImage = {
-        let image = #imageLiteral(resourceName: "clapton-2")
-        //#imageLiteral(resourceName: "clapton-1")
-        //#imageLiteral(resourceName: "clapton-2")
-        //#imageLiteral(resourceName: "lennon-2")
-        
-        let newWidth:CGFloat = 160
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), true, 3.0)
-        image.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
+    lazy var clapton1Image: UIImage = {
+        return resize(image: #imageLiteral(resourceName: "clapton-1_aligned"))
     }()
-    let csvName: String = "lennon2"
+    lazy var clapton2Image: UIImage = {
+        return resize(image: #imageLiteral(resourceName: "clapton-2_aligned"))
+    }()
+    lazy var lennon1Image: UIImage = {
+        return resize(image: #imageLiteral(resourceName: "lennon-1_aligned"))
+    }()
+    lazy var lennon2Image: UIImage = {
+        return resize(image: #imageLiteral(resourceName: "lennon-2_aligned"))
+    }()
+    
+    var matrixDic: [String : Matrix<Double>] = [:]//key-> clapton1,clapton2,lennon1,lennon2
+    
+    let csvName: String = "lennon1"
     //clapton1
+    //lennon1
     //lennon2
     
     override func viewDidLoad() {
@@ -65,24 +64,47 @@ class OpenFaceViewController: UIViewController {
         
         print(NSHomeDirectory())
         
-        readDataFromCSV()
+//        readDataFromCSV()
         
-        let image = self.image
+        let image = self.clapton1Image
         self.imageView.image = image
         
-        startFaceDetection()
+//        startFaceDetection()
         
         //UIImage -> CVPixelBuffer
-        let pixelBuffer = pixelBufferFromImage(image: self.image)
-        let requestOptions:[VNImageOption : Any] = [:]
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
+//        let pixelBuffer = pixelBufferFromImage(image: image)
+//        let requestOptions:[VNImageOption : Any] = [:]
+//        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
+//        do {
+//            self.currentPixelBuffer = pixelBuffer
+//            try imageRequestHandler.perform(self.requests)
+//            self.count += 1
+//        } catch {
+//            print(error)
+//        }
+        
+        requestML(image: self.clapton1Image)
+    }
+    
+    func requestML(image: UIImage) {
+        print(#function, image)
+        let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image), orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
         do {
-            self.currentPixelBuffer = pixelBuffer
-            try imageRequestHandler.perform(self.requests)
-            self.count += 1
+            try MLRequestHandler.perform([self.mlRequest])
         } catch {
             print(error)
         }
+    }
+    
+    func resize(image: UIImage) -> UIImage {
+        let newWidth:CGFloat = 160
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), true, 3.0)
+        image.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
     
     func startFaceDetection() {
@@ -129,7 +151,7 @@ class OpenFaceViewController: UIViewController {
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
 //                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
-                    try MLRequestHandler.perform([self.MLRequest])
+                    try MLRequestHandler.perform([self.mlRequest])
                 } catch {
                     print(error)
                 }
@@ -204,36 +226,80 @@ class OpenFaceViewController: UIViewController {
         return Array(buffer)
     }
     
+    
     func genEmbeddingsHandler(request: VNRequest, error: Error?) {
-        
-        guard let observations = request.results as? [ VNCoreMLFeatureValueObservation] else { return }
+        guard let observations = request.results as? [ VNCoreMLFeatureValueObservation] else {
+            return
+        }
         observations.forEach { observe in
             self.start = CACurrentMediaTime()
-            guard let emb = observe.featureValue.multiArrayValue else { return }
+            guard let emb = observe.featureValue.multiArrayValue else {
+                return
+            }
 //            print(emb)
             let doubleValueEmb = buffer2Array(length: emb.count, data: emb.dataPointer, Double.self)
-//            print(doubleValueEmb)
+//            print("[Result]")
+            print(doubleValueEmb)
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
-            guard let repsMatrix = self.repsMatrix else { return }
-            print("repsMatrix \(self.csvName)")
-            print(repsMatrix.description)
-            let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: repsMatrix.rows))
-            print("embMatrix")
-            print(embMatrix.description)
+//            guard let repsMatrix = self.repsMatrix else { return }
+//            print("repsMatrix \(self.csvName)")
+//            print("repsMatrix.rows \(repsMatrix.rows)")
+//            print(repsMatrix.description)
             
-            let diff = repsMatrix - embMatrix
-//            let result2 = mul(diff, y: transpose(diff))
-//            print(result2.description)
+            let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
+//            clapton1,clapton2,lennon1,lennon2
+            if (self.matrixDic["clapton1"] == nil) {
+                self.matrixDic["clapton1"] = embMatrix
+                self.requestML(image: self.clapton2Image)
+                return
+            }
+            if (self.matrixDic["clapton2"] == nil) {
+                self.matrixDic["clapton2"] = embMatrix
+                self.requestML(image: self.lennon1Image)
+                return
+            }
+            if (self.matrixDic["lennon1"] == nil) {
+                self.matrixDic["lennon1"] = embMatrix
+                self.requestML(image: self.lennon2Image)
+                return
+            }
+            if (self.matrixDic["lennon2"] == nil) {
+                self.matrixDic["lennon2"] = embMatrix
+            }
+            self.diff()
             
-            print("diff")
-            let squredDiff = myPow(diff, 2)
-//            print(squredDiff.description)
-            let l2 = sum(squredDiff, axies:.row)
-            print("squared L2 distance !!!!")
-            print(l2.description)
+//            print("embMatrix")
+//            print(embMatrix.description)
             
+//            let diff = repsMatrix - embMatrix
+//            print("diff")
+//            let squredDiff = myPow(diff, 2)
+//            let l2 = sum(squredDiff, axies:.row)
+//            print("squared L2 distance !!!!")
+//            print(l2.description)
+        }
+    }
+    
+    func diff() {
+        print("--------diff--------")
+        if let clapton1Matrix = self.matrixDic["clapton1"],
+        let clapton2Matrix = self.matrixDic["clapton2"],
+        let lennon1Matrix = self.matrixDic["lennon1"],
+        let lennon2Matrix = self.matrixDic["lennon2"] {
+            let l1 = sum(myPow(clapton1Matrix-clapton2Matrix, 2), axies:.row)
+            print("clapton1,clapton2:\(l1)")
+            let l2 = sum(myPow(lennon1Matrix-lennon2Matrix, 2), axies:.row)
+            print("lennon1,lennon2:\(l2)")
             
+            let l3 = sum(myPow(clapton2Matrix-lennon2Matrix, 2), axies:.row)
+            print("clapton2,lennon2:\(l3)")
+            let l4 = sum(myPow(clapton1Matrix-lennon1Matrix, 2), axies:.row)
+            print("clapton1,lennon1:\(l4)")
+            let l5 = sum(myPow(clapton1Matrix-lennon2Matrix, 2), axies:.row)
+            print("clapton1,lennon2:\(l5)")
+            let l6 = sum(myPow(clapton2Matrix-lennon1Matrix, 2), axies:.row)
+            print("clapton2,lennon1:\(l6)")
         }
     }
     
@@ -249,7 +315,7 @@ class OpenFaceViewController: UIViewController {
             .filter{ $0.count > 0 }
             .map{
                 //                print($0.components(separatedBy: ","))
-                return $0.replacingOccurrences(of: " ", with: "").components(separatedBy: ",").map{ Double($0)! }
+                return $0.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").components(separatedBy: ",").map{ Double($0)! }
         }
         print("Done Reps")
         let repsMatrix = Matrix(repsArray)
@@ -264,3 +330,4 @@ class OpenFaceViewController: UIViewController {
     }
 
 }
+
