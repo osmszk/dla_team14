@@ -57,7 +57,9 @@ class OpenFaceViewController: UIViewController {
     lazy var takemoto1Image: UIImage = #imageLiteral(resourceName: "takemoto1")
     lazy var takemoto2Image: UIImage = #imageLiteral(resourceName: "takemoto2")
     
-    var matrixDic: [String : Matrix<Double>] = [:]//key-> clapton1,clapton2,lennon1,lennon2
+    var matrixDic: [String : Matrix<Double>] = [:]
+    //key-> taniai1,taniai2,takemoto1,takemoto2
+    
     
     let csvName: String = "takemoto2"
     //clapton1
@@ -69,14 +71,30 @@ class OpenFaceViewController: UIViewController {
         
         print(NSHomeDirectory())
         
-        readDataFromCSV()
+//        readDataFromCSV()
         
-        let image = self.taniai2Image
+        let image = self.taniai1Image
         self.imageView.image = image
         
         startFaceDetection()
         
-        //UIImage -> CVPixelBuffer
+        requestML(image: image, skip: false)
+        
+    }
+    
+    func requestML(image: UIImage, skip: Bool = true) {
+        print(#function, image)
+        if skip {
+            //顔検出はスキップする
+            let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image), orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
+            do {
+                try MLRequestHandler.perform([self.mlRequest])
+            } catch {
+                print(error)
+            }
+            return
+        }
+        
         let pixelBuffer = pixelBufferFromImage(image: image)
         let requestOptions:[VNImageOption : Any] = [:]
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
@@ -84,18 +102,6 @@ class OpenFaceViewController: UIViewController {
             self.currentPixelBuffer = pixelBuffer
             try imageRequestHandler.perform(self.requests)
             self.count += 1
-        } catch {
-            print(error)
-        }
-        
-//        requestML(image: self.clapton1Image)
-    }
-    
-    func requestML(image: UIImage) {
-        print(#function, image)
-        let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image), orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
-        do {
-            try MLRequestHandler.perform([self.mlRequest])
         } catch {
             print(error)
         }
@@ -173,10 +179,7 @@ class OpenFaceViewController: UIViewController {
                     return
                 }
                 
-//                self.showImageAsTest(name: "croppedPixelBuffer", pixelBuffer: croppedPixelBuffer)
-                
                 let MLRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
-//                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
 //                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
@@ -326,41 +329,65 @@ class OpenFaceViewController: UIViewController {
             print(doubleValueEmb)
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
-            guard let repsMatrix = self.repsMatrix else { return }
-            print("repsMatrix \(self.csvName)")
-//            print("repsMatrix.rows \(repsMatrix.rows)")
-//            print(repsMatrix.description)
             let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
-//            print("embMatrix")
-//            print(embMatrix.description)
+            if (self.matrixDic["taniai1"] == nil) {
+                self.matrixDic["taniai1"] = embMatrix
+                self.requestML(image: self.taniai2Image, skip: false)
+                return
+            }
+            if (self.matrixDic["taniai2"] == nil) {
+                self.matrixDic["taniai2"] = embMatrix
+                self.requestML(image: self.takemoto1Image)
+                return
+            }
+            if (self.matrixDic["takemoto1"] == nil) {
+                self.matrixDic["takemoto1"] = embMatrix
+                self.requestML(image: self.takemoto2Image)
+                return
+            }
+            if (self.matrixDic["takemoto2"] == nil) {
+                self.matrixDic["takemoto2"] = embMatrix
+            }
+            self.diff()
             
-            let diff = repsMatrix - embMatrix
-            let squredDiff = myPow(diff, 2)
-            let l2 = sum(squredDiff, axies:.row)
-            print("squared L2 distance !!!!")
-            print(l2.description)
+//            guard let repsMatrix = self.repsMatrix else { return }
+//            print("repsMatrix \(self.csvName)")
+////            print("repsMatrix.rows \(repsMatrix.rows)")
+////            print(repsMatrix.description)
+//            let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
+////            print("embMatrix")
+////            print(embMatrix.description)
+//
+//            let diff = repsMatrix - embMatrix
+//            let squredDiff = myPow(diff, 2)
+//            let l2 = sum(squredDiff, axies:.row)
+//            print("squared L2 distance !!!!")
+//            print(l2.description)
         }
     }
     
+    
     func diff() {
         print("--------diff--------")
-        if let clapton1Matrix = self.matrixDic["clapton1"],
-        let clapton2Matrix = self.matrixDic["clapton2"],
-        let lennon1Matrix = self.matrixDic["lennon1"],
-        let lennon2Matrix = self.matrixDic["lennon2"] {
-            let l1 = sum(myPow(clapton1Matrix-clapton2Matrix, 2), axies:.row)
-            print("clapton1,clapton2:\(l1)")
-            let l2 = sum(myPow(lennon1Matrix-lennon2Matrix, 2), axies:.row)
-            print("lennon1,lennon2:\(l2)")
+        if let taniai1 = self.matrixDic["taniai1"],
+        let taniai2 = self.matrixDic["taniai2"],
+        let takemoto1 = self.matrixDic["takemoto1"],
+        let takemoto2 = self.matrixDic["takemoto2"] {
+            print("<<<same person>>>")
+            let l1 = sum(myPow(taniai1-taniai2, 2), axies:.row)
+            print("taniai1,taniai2:\(l1)")
+            let l2 = sum(myPow(takemoto1-takemoto2, 2), axies:.row)
+            print("takemoto1,takemoto2:\(l2)")
             
-            let l3 = sum(myPow(clapton2Matrix-lennon2Matrix, 2), axies:.row)
-            print("clapton2,lennon2:\(l3)")
-            let l4 = sum(myPow(clapton1Matrix-lennon1Matrix, 2), axies:.row)
-            print("clapton1,lennon1:\(l4)")
-            let l5 = sum(myPow(clapton1Matrix-lennon2Matrix, 2), axies:.row)
-            print("clapton1,lennon2:\(l5)")
-            let l6 = sum(myPow(clapton2Matrix-lennon1Matrix, 2), axies:.row)
-            print("clapton2,lennon1:\(l6)")
+            print("<<<different person>>>")
+            let l3 = sum(myPow(taniai2-takemoto2, 2), axies:.row)
+            print("taniai2,takemoto2:\(l3)")
+            let l4 = sum(myPow(taniai1-takemoto1, 2), axies:.row)
+            print("taniai1,takemoto1:\(l4)")
+            let l5 = sum(myPow(taniai1-takemoto2, 2), axies:.row)
+            print("taniai1,takemoto2:\(l5)")
+            let l6 = sum(myPow(taniai2-takemoto1, 2), axies:.row)
+            print("taniai2,takemoto1:\(l6)")
         }
     }
     
