@@ -337,12 +337,12 @@ class OpenFaceViewController: UIViewController {
             }
             if (self.matrixDic["taniai2"] == nil) {
                 self.matrixDic["taniai2"] = embMatrix
-                self.requestML(image: self.takemoto1Image)
+                self.requestML(image: self.takemoto1Image, skip: false)
                 return
             }
             if (self.matrixDic["takemoto1"] == nil) {
                 self.matrixDic["takemoto1"] = embMatrix
-                self.requestML(image: self.takemoto2Image)
+                self.requestML(image: self.takemoto2Image, skip: false)
                 return
             }
             if (self.matrixDic["takemoto2"] == nil) {
