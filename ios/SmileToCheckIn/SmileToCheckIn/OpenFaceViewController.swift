@@ -52,9 +52,14 @@ class OpenFaceViewController: UIViewController {
         return resize(image: #imageLiteral(resourceName: "lennon-2_aligned"))
     }()
     
+    lazy var taniai1Image: UIImage = #imageLiteral(resourceName: "taniai1")
+    lazy var taniai2Image: UIImage = #imageLiteral(resourceName: "taniai2")
+    lazy var takemoto1Image: UIImage = #imageLiteral(resourceName: "takemoto1")
+    lazy var takemoto2Image: UIImage = #imageLiteral(resourceName: "takemoto2")
+    
     var matrixDic: [String : Matrix<Double>] = [:]//key-> clapton1,clapton2,lennon1,lennon2
     
-    let csvName: String = "lennon1"
+    let csvName: String = "takemoto2"
     //clapton1
     //lennon1
     //lennon2
@@ -64,26 +69,26 @@ class OpenFaceViewController: UIViewController {
         
         print(NSHomeDirectory())
         
-//        readDataFromCSV()
+        readDataFromCSV()
         
-        let image = self.clapton1Image
+        let image = self.taniai2Image
         self.imageView.image = image
         
-//        startFaceDetection()
+        startFaceDetection()
         
         //UIImage -> CVPixelBuffer
-//        let pixelBuffer = pixelBufferFromImage(image: image)
-//        let requestOptions:[VNImageOption : Any] = [:]
-//        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
-//        do {
-//            self.currentPixelBuffer = pixelBuffer
-//            try imageRequestHandler.perform(self.requests)
-//            self.count += 1
-//        } catch {
-//            print(error)
-//        }
+        let pixelBuffer = pixelBufferFromImage(image: image)
+        let requestOptions:[VNImageOption : Any] = [:]
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
+        do {
+            self.currentPixelBuffer = pixelBuffer
+            try imageRequestHandler.perform(self.requests)
+            self.count += 1
+        } catch {
+            print(error)
+        }
         
-        requestML(image: self.clapton1Image)
+//        requestML(image: self.clapton1Image)
     }
     
     func requestML(image: UIImage) {
@@ -145,9 +150,33 @@ class OpenFaceViewController: UIViewController {
                 let scaledRect = CGRect(x: x, y: y, width: w, height: h)
                 print("boundingRect:\(boundingRect) scaledRect:\(scaledRect)")
                 guard let croppedPixelBuffer = self.cropFace(imageBuffer: pixelBuffer, region: scaledRect) else { return }
+                
+                let multiArray = self.toMultiArrayFromPixelBuffer(pixelBuffer: croppedPixelBuffer)
+                print("multiArray shape",multiArray.shape)
+                
+                self.showImageAsTest(name: "croppedPixelBuffer", image: multiArray.transposed([2,0,1]).image(offset: 0, scale: 1)!)
+                
+                let prewhitened = self.prewhiten(multiArray).transposed([2,0,1]) //shape変更[w,h,c] -> [c,w,h]
+                print("prewhitened shape",prewhitened.shape)
+                
+                guard let uiImage = prewhitened.image(offset: 0.0, scale: 1.0) else {
+                    print("uiImage is nil")
+                    return
+                }
+                guard let ciImage = CIImage(image: uiImage) else {
+                    print("ciImage is nil")
+                    return
+                }
+                let context = CIContext(options: nil)
+                guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
+                    print("cgImage is nil")
+                    return
+                }
+                
 //                self.showImageAsTest(name: "croppedPixelBuffer", pixelBuffer: croppedPixelBuffer)
                 
-                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
+                let MLRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
+//                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
 //                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
@@ -167,6 +196,15 @@ class OpenFaceViewController: UIViewController {
                 imageView.image = image
                 self.view.addSubview(imageView)
             }
+        }
+    }
+    
+    func showImageAsTest(name: String, image: UIImage) {
+        DispatchQueue.main.async {
+            print("showImageAsTest size:\(image.size)")
+            let imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: image.size))
+            imageView.image = image
+            self.view.addSubview(imageView)
         }
     }
     
@@ -193,6 +231,52 @@ class OpenFaceViewController: UIViewController {
             print("CVPixelBufferCreate Error: ", status)
         }
         return croppedImageBuffer
+    }
+    
+    func toMultiArrayFromPixelBuffer(pixelBuffer: CVPixelBuffer) -> MultiArray<Double>{
+        print(#function,"----------------------------")
+        
+        ////https://stackoverflow.com/questions/8072208/how-to-turn-a-cvpixelbuffer-into-a-uiimage
+        
+        CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0));
+        
+        let w = CVPixelBufferGetWidth(pixelBuffer)
+        let h = CVPixelBufferGetHeight(pixelBuffer)
+        let r = CVPixelBufferGetBytesPerRow(pixelBuffer)
+        
+        print("w,h,r",w,h,r)
+        
+        let channel = 3
+        var m = MultiArray<Double>(shape: [h, w, channel])
+        print(m.shape)
+        if let buffer = CVPixelBufferGetBaseAddress(pixelBuffer) {
+            
+            let maxY = h
+            
+            print("A R G B")
+            var i: Int = 0
+            for y in 0..<maxY {
+                for x in 0..<w {
+                    let offset = 4*x + y*r
+                    
+                    //https://stackoverflow.com/questions/39548344/getting-pixel-color-from-an-image-using-cgpoint-in-swift-3
+                    let a = buffer.load(fromByteOffset: offset+3, as: UInt8.self)
+                    let r = buffer.load(fromByteOffset: offset+2, as: UInt8.self)
+                    let g = buffer.load(fromByteOffset: offset+1, as: UInt8.self)
+                    let b = buffer.load(fromByteOffset: offset, as: UInt8.self)
+//                    print("offset:",offset,"ARGB:",a,r,g,b)
+                    m[i] = Double(r)
+                    i += 1
+                    m[i] = Double(g)
+                    i += 1
+                    m[i] = Double(b)
+                    i += 1
+                }
+            }
+        }
+        
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue:1))
+        return m
     }
     
     func highlightFace(faceObservation: VNFaceObservation) {
@@ -242,42 +326,19 @@ class OpenFaceViewController: UIViewController {
             print(doubleValueEmb)
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
-//            guard let repsMatrix = self.repsMatrix else { return }
-//            print("repsMatrix \(self.csvName)")
+            guard let repsMatrix = self.repsMatrix else { return }
+            print("repsMatrix \(self.csvName)")
 //            print("repsMatrix.rows \(repsMatrix.rows)")
 //            print(repsMatrix.description)
-            
             let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
-//            clapton1,clapton2,lennon1,lennon2
-            if (self.matrixDic["clapton1"] == nil) {
-                self.matrixDic["clapton1"] = embMatrix
-                self.requestML(image: self.clapton2Image)
-                return
-            }
-            if (self.matrixDic["clapton2"] == nil) {
-                self.matrixDic["clapton2"] = embMatrix
-                self.requestML(image: self.lennon1Image)
-                return
-            }
-            if (self.matrixDic["lennon1"] == nil) {
-                self.matrixDic["lennon1"] = embMatrix
-                self.requestML(image: self.lennon2Image)
-                return
-            }
-            if (self.matrixDic["lennon2"] == nil) {
-                self.matrixDic["lennon2"] = embMatrix
-            }
-            self.diff()
-            
 //            print("embMatrix")
 //            print(embMatrix.description)
             
-//            let diff = repsMatrix - embMatrix
-//            print("diff")
-//            let squredDiff = myPow(diff, 2)
-//            let l2 = sum(squredDiff, axies:.row)
-//            print("squared L2 distance !!!!")
-//            print(l2.description)
+            let diff = repsMatrix - embMatrix
+            let squredDiff = myPow(diff, 2)
+            let l2 = sum(squredDiff, axies:.row)
+            print("squared L2 distance !!!!")
+            print(l2.description)
         }
     }
     
@@ -327,6 +388,58 @@ class OpenFaceViewController: UIViewController {
         
         self.end = CACurrentMediaTime()
         print("Done Import data:", self.end - self.start)
+    }
+    
+    // MARK: - Prewhiten
+    
+    func mean(_ array: MultiArray<Double>) -> Double {
+        var sum: Double = 0.0
+        for i in 0..<array.count {
+            sum += array[i]
+        }
+        //    print("sum",sum)
+        //    print("mean", sum/Double(array.count))
+        return sum/Double(array.count)
+    }
+    
+    func std(_ array: MultiArray<Double>) -> Double {
+        return sqrt(vars(array))
+    }
+    
+    func stdAdj(_ array: MultiArray<Double>, std: Double) -> Double {
+        let comp: Double = 1.0/sqrt(Double(array.count))
+        return comp > std ? comp : std
+    }
+    
+    // 不偏分散（標本分散）
+    func vars(_ array: MultiArray<Double>) -> Double {
+        return sumOfSquares(array) / Double(array.count)
+    }
+    
+    // 平方和
+    func sumOfSquares(_ array: MultiArray<Double>) -> Double {
+        let mu: Double = mean(array)
+        var ss: Double = 0.0
+        for i in 0..<array.count {
+            let deviation: Double = array[i] - mu
+            ss += pow(deviation, 2.0)
+        }
+        return ss
+    }
+    
+    func prewhiten(_ array: MultiArray<Double>) -> MultiArray<Double> {
+        
+        var marray = array
+        let avg = mean(array)
+        
+        let s = std(array)
+        
+        let adj = stdAdj(array, std: s)
+        
+        for i in 0..<array.count {
+            marray[i] = (array[i] - avg) * 1.0/adj
+        }
+        return marray
     }
 
 }
