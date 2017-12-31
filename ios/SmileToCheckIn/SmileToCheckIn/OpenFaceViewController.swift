@@ -366,6 +366,10 @@ class OpenFaceViewController: UIViewController {
         }
     }
     
+    func distanceMatrix(a:Matrix<Double>, b:Matrix<Double>) -> Double {
+        let s = sum(myPow(a-b, 2), axies:.row)
+        return sqrt(Double(s.grid[0]))
+    }
     
     func diff() {
         print("--------diff--------")
@@ -374,19 +378,19 @@ class OpenFaceViewController: UIViewController {
         let takemoto1 = self.matrixDic["takemoto1"],
         let takemoto2 = self.matrixDic["takemoto2"] {
             print("<<<same person>>>")
-            let l1 = sum(myPow(taniai1-taniai2, 2), axies:.row)
+            let l1 = distanceMatrix(a:taniai1,b:taniai2)
             print("taniai1,taniai2:\(l1)")
-            let l2 = sum(myPow(takemoto1-takemoto2, 2), axies:.row)
+            let l2 = distanceMatrix(a:takemoto1,b:takemoto2)
             print("takemoto1,takemoto2:\(l2)")
             
             print("<<<different person>>>")
-            let l3 = sum(myPow(taniai2-takemoto2, 2), axies:.row)
+            let l3 = distanceMatrix(a:taniai2,b:takemoto2)
             print("taniai2,takemoto2:\(l3)")
-            let l4 = sum(myPow(taniai1-takemoto1, 2), axies:.row)
+            let l4 = distanceMatrix(a:taniai1,b:takemoto1)
             print("taniai1,takemoto1:\(l4)")
-            let l5 = sum(myPow(taniai1-takemoto2, 2), axies:.row)
+            let l5 = distanceMatrix(a:taniai1,b:takemoto2)
             print("taniai1,takemoto2:\(l5)")
-            let l6 = sum(myPow(taniai2-takemoto1, 2), axies:.row)
+            let l6 = distanceMatrix(a:taniai2,b:takemoto1)
             print("taniai2,takemoto1:\(l6)")
         }
     }

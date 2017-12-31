@@ -31,9 +31,9 @@ class SmileToCheckInTests: XCTestCase {
         print(a.columns * a.rows)
         print(sum(a.grid)/Double(a.columns * a.rows))
         print(mean(matrix: a))
-        
-        
     }
+    
+    
     
     func mean(matrix:Matrix<Double>) -> Double {
         return sum(matrix.grid)/Double(matrix.columns * matrix.rows)
