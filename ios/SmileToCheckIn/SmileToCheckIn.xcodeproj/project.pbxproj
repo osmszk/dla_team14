@@ -36,6 +36,14 @@
 		C7A2032D1FF79C12000DCB94 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A2032C1FF79C11000DCB94 /* MultiArray.swift */; };
 		C7A2032F1FF79C28000DCB94 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A2032E1FF79C28000DCB94 /* MLMultiArray+Image.swift */; };
 		C7A203311FF79E36000DCB94 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A203301FF79E35000DCB94 /* Math.swift */; };
+		C7A203411FF91AE1000DCB94 /* taniai2.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033C1FF91AE1000DCB94 /* taniai2.png */; };
+		C7A203421FF91AE1000DCB94 /* taniai2.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033C1FF91AE1000DCB94 /* taniai2.png */; };
+		C7A203431FF91AE1000DCB94 /* taniai1.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033D1FF91AE1000DCB94 /* taniai1.png */; };
+		C7A203441FF91AE1000DCB94 /* taniai1.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033D1FF91AE1000DCB94 /* taniai1.png */; };
+		C7A203451FF91AE1000DCB94 /* takemoto1.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033F1FF91AE1000DCB94 /* takemoto1.png */; };
+		C7A203461FF91AE1000DCB94 /* takemoto1.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033F1FF91AE1000DCB94 /* takemoto1.png */; };
+		C7A203471FF91AE1000DCB94 /* takemoto2.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203401FF91AE1000DCB94 /* takemoto2.png */; };
+		C7A203481FF91AE1000DCB94 /* takemoto2.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203401FF91AE1000DCB94 /* takemoto2.png */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
@@ -87,6 +95,10 @@
 		C7A2032C1FF79C11000DCB94 /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
 		C7A2032E1FF79C28000DCB94 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		C7A203301FF79E35000DCB94 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		C7A2033C1FF91AE1000DCB94 /* taniai2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai2.png; sourceTree = "<group>"; };
+		C7A2033D1FF91AE1000DCB94 /* taniai1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai1.png; sourceTree = "<group>"; };
+		C7A2033F1FF91AE1000DCB94 /* takemoto1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto1.png; sourceTree = "<group>"; };
+		C7A203401FF91AE1000DCB94 /* takemoto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto2.png; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -157,6 +169,7 @@
 				C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */,
 				C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */,
 				C746DC2A1FF3A23E005BC1E1 /* FaceNet2.mlmodel */,
+				C7A2033A1FF91AE1000DCB94 /* images_,member */,
 				C7F1E2E51FF0F04300D32497 /* scaling.swift */,
 				C72C6F001FE5044B005F8C0B /* clapton1.csv */,
 				C746DC2C1FF3AA7C005BC1E1 /* lennon1.csv */,
@@ -179,6 +192,33 @@
 				C7A2031F1FF6241F000DCB94 /* Info.plist */,
 			);
 			path = SmileToCheckInTests;
+			sourceTree = "<group>";
+		};
+		C7A2033A1FF91AE1000DCB94 /* images_,member */ = {
+			isa = PBXGroup;
+			children = (
+				C7A2033B1FF91AE1000DCB94 /* taniai */,
+				C7A2033E1FF91AE1000DCB94 /* takemoto */,
+			);
+			path = "images_,member";
+			sourceTree = "<group>";
+		};
+		C7A2033B1FF91AE1000DCB94 /* taniai */ = {
+			isa = PBXGroup;
+			children = (
+				C7A2033C1FF91AE1000DCB94 /* taniai2.png */,
+				C7A2033D1FF91AE1000DCB94 /* taniai1.png */,
+			);
+			path = taniai;
+			sourceTree = "<group>";
+		};
+		C7A2033E1FF91AE1000DCB94 /* takemoto */ = {
+			isa = PBXGroup;
+			children = (
+				C7A2033F1FF91AE1000DCB94 /* takemoto1.png */,
+				C7A203401FF91AE1000DCB94 /* takemoto2.png */,
+			);
+			path = takemoto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,10 +309,14 @@
 				C746DC2D1FF3AA7C005BC1E1 /* lennon1.csv in Resources */,
 				C72C6F051FE5237D005F8C0B /* clapton1_openface.csv in Resources */,
 				C7A203131FF5F4D9000DCB94 /* taniai1.csv in Resources */,
+				C7A203471FF91AE1000DCB94 /* takemoto2.png in Resources */,
+				C7A203451FF91AE1000DCB94 /* takemoto1.png in Resources */,
 				C72C6F0B1FE5601E005F8C0B /* lennon2.csv in Resources */,
 				C72C6F091FE52557005F8C0B /* carell_openface.csv in Resources */,
 				C72C6F011FE5044B005F8C0B /* clapton1.csv in Resources */,
+				C7A203411FF91AE1000DCB94 /* taniai2.png in Resources */,
 				C71FAAE81FC3D7D400CC8664 /* LaunchScreen.storyboard in Resources */,
+				C7A203431FF91AE1000DCB94 /* taniai1.png in Resources */,
 				C71FAAE51FC3D7D400CC8664 /* Assets.xcassets in Resources */,
 				C7A203161FF5F4D9000DCB94 /* taniai2.csv in Resources */,
 				C72C6F071FE52476005F8C0B /* clapton2_openface.csv in Resources */,
@@ -284,6 +328,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A203421FF91AE1000DCB94 /* taniai2.png in Resources */,
+				C7A203461FF91AE1000DCB94 /* takemoto1.png in Resources */,
+				C7A203481FF91AE1000DCB94 /* takemoto2.png in Resources */,
+				C7A203441FF91AE1000DCB94 /* taniai1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,15 +52,10 @@ class OpenFaceViewController: UIViewController {
         return resize(image: #imageLiteral(resourceName: "lennon-2_aligned"))
     }()
     
-    lazy var taniai1Image: UIImage = #imageLiteral(resourceName: "taniai1")
-    lazy var taniai2Image: UIImage = #imageLiteral(resourceName: "taniai2")
-    lazy var takemoto1Image: UIImage = #imageLiteral(resourceName: "takemoto1")
-    lazy var takemoto2Image: UIImage = #imageLiteral(resourceName: "takemoto2")
-    
     var matrixDic: [String : Matrix<Double>] = [:]
     //key-> taniai1,taniai2,takemoto1,takemoto2
     
-    
+    var imageNameNumber: Int = 1
     let csvName: String = "takemoto2"
     //clapton1
     //lennon1
@@ -73,17 +68,22 @@ class OpenFaceViewController: UIViewController {
         
 //        readDataFromCSV()
         
-        let image = self.taniai1Image
+        let imageName = "taniai\(imageNameNumber).png"
+        let image = UIImage(named: imageName)!
         self.imageView.image = image
         
         startFaceDetection()
         
-        requestML(image: image, skip: false)
-        
+        requestML(name: imageName, skip: false)
+    }
+    
+    func requestML(name: String , skip: Bool = true) {
+        print(#function, name)
+        let image = UIImage(named: name)!
+        self.requestML(image: image, skip: skip)
     }
     
     func requestML(image: UIImage, skip: Bool = true) {
-        print(#function, image)
         if skip {
             //顔検出はスキップする
             let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image), orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
@@ -211,6 +211,12 @@ class OpenFaceViewController: UIViewController {
         }
     }
     
+    func setImage(image: UIImage) {
+        DispatchQueue.main.async {
+            self.imageView.image = image
+        }
+    }
+    
     func cropFace(imageBuffer: CVPixelBuffer, region: CGRect) -> CVPixelBuffer? {
         CVPixelBufferLockBaseAddress(imageBuffer, .readOnly)
         let baseAddress = CVPixelBufferGetBaseAddress(imageBuffer)
@@ -313,7 +319,6 @@ class OpenFaceViewController: UIViewController {
         return Array(buffer)
     }
     
-    
     func genEmbeddingsHandler(request: VNRequest, error: Error?) {
         guard let observations = request.results as? [ VNCoreMLFeatureValueObservation] else {
             return
@@ -330,39 +335,42 @@ class OpenFaceViewController: UIViewController {
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
             let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
-            if (self.matrixDic["taniai1"] == nil) {
-                self.matrixDic["taniai1"] = embMatrix
-                self.requestML(image: self.taniai2Image, skip: false)
-                return
+            var imageName = "taniai\(self.imageNameNumber).png"
+            if (self.matrixDic[imageName] == nil) {
+                self.matrixDic[imageName] = embMatrix
+                self.imageNameNumber += 1
+                imageName = "taniai\(self.imageNameNumber).png"
+                if let img = UIImage(named: imageName) {
+                    self.setImage(image: img)
+                    self.requestML(name: imageName, skip: false)
+                    return
+                } else {
+                    self.imageNameNumber = 1
+                    
+                    //next person
+                    imageName = "takemoto\(self.imageNameNumber).png"
+                    if let img = UIImage(named: imageName) {
+                        self.setImage(image: img)
+                        self.requestML(name: imageName, skip: false)
+                        return
+                    }
+                }
             }
-            if (self.matrixDic["taniai2"] == nil) {
-                self.matrixDic["taniai2"] = embMatrix
-                self.requestML(image: self.takemoto1Image, skip: false)
-                return
-            }
-            if (self.matrixDic["takemoto1"] == nil) {
-                self.matrixDic["takemoto1"] = embMatrix
-                self.requestML(image: self.takemoto2Image, skip: false)
-                return
-            }
-            if (self.matrixDic["takemoto2"] == nil) {
-                self.matrixDic["takemoto2"] = embMatrix
-            }
-            self.diff()
             
-//            guard let repsMatrix = self.repsMatrix else { return }
-//            print("repsMatrix \(self.csvName)")
-////            print("repsMatrix.rows \(repsMatrix.rows)")
-////            print(repsMatrix.description)
-//            let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
-////            print("embMatrix")
-////            print(embMatrix.description)
-//
-//            let diff = repsMatrix - embMatrix
-//            let squredDiff = myPow(diff, 2)
-//            let l2 = sum(squredDiff, axies:.row)
-//            print("squared L2 distance !!!!")
-//            print(l2.description)
+            imageName = "takemoto\(self.imageNameNumber).png"
+            
+            if (self.matrixDic[imageName] == nil) {
+                self.matrixDic[imageName] = embMatrix
+                self.imageNameNumber += 1
+                imageName = "takemoto\(self.imageNameNumber).png"
+                if let img = UIImage(named: imageName) {
+                    self.setImage(image: img)
+                    self.requestML(name: imageName, skip: false)
+                    return
+                }
+            }
+            
+            self.diff()
         }
     }
     
@@ -373,10 +381,10 @@ class OpenFaceViewController: UIViewController {
     
     func diff() {
         print("--------diff--------")
-        if let taniai1 = self.matrixDic["taniai1"],
-        let taniai2 = self.matrixDic["taniai2"],
-        let takemoto1 = self.matrixDic["takemoto1"],
-        let takemoto2 = self.matrixDic["takemoto2"] {
+        if let taniai1 = self.matrixDic["taniai1.png"],
+        let taniai2 = self.matrixDic["taniai2.png"],
+        let takemoto1 = self.matrixDic["takemoto1.png"],
+        let takemoto2 = self.matrixDic["takemoto2.png"] {
             print("<<<same person>>>")
             let l1 = distanceMatrix(a:taniai1,b:taniai2)
             print("taniai1,taniai2:\(l1)")
