@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreML
 
 class SmileToCheckInTests: XCTestCase {
     
@@ -33,17 +34,65 @@ class SmileToCheckInTests: XCTestCase {
         print(mean(matrix: a))
     }
     
+    func testDistance() {
+        
+        let a = Matrix(Array(repeating: [1,2,3], count: 1))
+        let b = Matrix(Array(repeating: [10,20,30], count: 1))
+        
+        let d = sum(myPow(a-b, 2), axies:.row)
+        print(d.grid[0])
+        let dis = sqrt(Double(d.grid[0]))
+        print(dis)
+        
+        print(distanceMatrix(a: a, b: b))
+        
+    }
+    
+    func distanceMatrix(a:Matrix<Double>, b:Matrix<Double>) -> Double {
+        let s = sum(myPow(a-b, 2), axies:.row)
+        return sqrt(Double(s.grid[0]))
+    }
+    
+    func testL2NormalizeMarix() {
+        let a: [Double] = [0,1,2,3,6,2]
+        let b: [Double] = [7,8,4,5,3,3]
+        let c: [Double] = [1,2,3,5,6,9]
+        let concat: [[Double]] = [a,b,c]
+        //        let row = 3
+        //        let column = 4
+        let m = Matrix<Double>(concat)
+        print(m)
+        let sq = myPow(m, 2)
+        var summ = sum(sq, axies: .row)
+        let epsilon: Double = 1e-10
+        
+        print(sq)
+        print(summ)
+        print("epsilon",epsilon)
+        for r in 0..<summ.rows {
+            if summ[row:r][0] < epsilon {
+                summ[row:r] = [epsilon]
+            }
+        }
+        print(summ)
+        
+        let sq2 = myPow(summ, 0.5)
+        var mm = m
+        for r in 0..<mm.rows {
+            let target = sq2[row:r][0]
+            for (c, val) in m[row:r].enumerated() {
+                mm[r, c] = val/target
+            }
+        }
+        print(sq2)
+        print(mm)
+    }
+    
     
     
     func mean(matrix:Matrix<Double>) -> Double {
         return sum(matrix.grid)/Double(matrix.columns * matrix.rows)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
 }
