@@ -17,7 +17,6 @@ class OpenFaceViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    var model: FaceNetModel!
     var session = AVCaptureSession()
     var requests = [VNRequest]()
     var currentPixelBuffer: CVPixelBuffer?
@@ -74,17 +73,17 @@ class OpenFaceViewController: UIViewController {
         
         startFaceDetection()
         
-        requestML(name: imageName, skip: false)
+        requestML(name: imageName, skipDetect: false)
     }
     
-    func requestML(name: String , skip: Bool = true) {
+    func requestML(name: String , skipDetect: Bool = true) {
         print(#function, name)
         let image = UIImage(named: name)!
-        self.requestML(image: image, skip: skip)
+        self.requestML(image: image, skipDetect: skipDetect)
     }
     
-    func requestML(image: UIImage, skip: Bool = true) {
-        if skip {
+    func requestML(image: UIImage, skipDetect: Bool = true) {
+        if skipDetect {
             //顔検出はスキップする
             let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image), orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
             do {
@@ -164,11 +163,13 @@ class OpenFaceViewController: UIViewController {
                 
                 let prewhitened = self.prewhiten(multiArray).transposed([2,0,1]) //shape変更[w,h,c] -> [c,w,h]
                 print("prewhitened shape",prewhitened.shape)
+//                print("prewhitened",prewhitened)
                 
                 guard let uiImage = prewhitened.image(offset: 0.0, scale: 1.0) else {
                     print("uiImage is nil")
                     return
                 }
+                
                 guard let ciImage = CIImage(image: uiImage) else {
                     print("ciImage is nil")
                     return
@@ -342,7 +343,7 @@ class OpenFaceViewController: UIViewController {
                 imageName = "taniai\(self.imageNameNumber).png"
                 if let img = UIImage(named: imageName) {
                     self.setImage(image: img)
-                    self.requestML(name: imageName, skip: false)
+                    self.requestML(name: imageName, skipDetect: false)
                     return
                 } else {
                     self.imageNameNumber = 1
@@ -351,7 +352,7 @@ class OpenFaceViewController: UIViewController {
                     imageName = "takemoto\(self.imageNameNumber).png"
                     if let img = UIImage(named: imageName) {
                         self.setImage(image: img)
-                        self.requestML(name: imageName, skip: false)
+                        self.requestML(name: imageName, skipDetect: false)
                         return
                     }
                 }
@@ -365,7 +366,7 @@ class OpenFaceViewController: UIViewController {
                 imageName = "takemoto\(self.imageNameNumber).png"
                 if let img = UIImage(named: imageName) {
                     self.setImage(image: img)
-                    self.requestML(name: imageName, skip: false)
+                    self.requestML(name: imageName, skipDetect: false)
                     return
                 }
             }
