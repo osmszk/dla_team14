@@ -52,6 +52,7 @@ class OpenFaceViewController: UIViewController {
     }()
     
     var matrixDic: [String : Matrix<Double>] = [:]
+    var results: [[Double]] = []
     //key-> taniai1,taniai2,takemoto1,takemoto2
     
     var imageNameNumber: Int = 1
@@ -175,7 +176,6 @@ class OpenFaceViewController: UIViewController {
                 }
                 
                 let MLRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-//                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, options: [:])
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
 //                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
@@ -328,6 +328,9 @@ class OpenFaceViewController: UIViewController {
             let doubleValueEmb = buffer2Array(length: emb.count, data: emb.dataPointer, Double.self)
 //            print("[Result]")
             print(doubleValueEmb)
+            
+            self.results.append(doubleValueEmb)
+            
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
             let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
@@ -341,6 +344,11 @@ class OpenFaceViewController: UIViewController {
                     self.requestML(name: imageName, skipDetect: false)
                     return
                 } else {
+                    print("[result]", self.results.count, self.results[0].count)
+                    print(self.results)
+                    
+                    
+                    self.l2Normalize(concat:self.results)
                     return
 //                    self.imageNameNumber = 1
 //
@@ -369,6 +377,38 @@ class OpenFaceViewController: UIViewController {
 //
 //            self.diff()
         }
+    }
+    
+    func l2Normalize(concat: [[Double]]) -> Matrix<Double> {
+        let m = Matrix<Double>(concat)
+        
+        let sq = myPow(m, 2)
+        var summ = sum(sq, axies: .row)
+        let epsilon: Double = 1e-10
+        
+        print(m)
+        print(sq)
+        print(summ)
+        print("epsilon",epsilon)
+        for r in 0..<summ.rows {
+            if summ[row:r][0] < epsilon {
+                summ[row:r] = [epsilon]
+            }
+        }
+        print(summ)
+        
+        let sq2 = myPow(summ, 0.5)
+        var mm = m
+        for r in 0..<mm.rows {
+            let target = sq2[row:r][0]
+            for (c, val) in m[row:r].enumerated() {
+                mm[r, c] = val/target
+            }
+        }
+        print(sq2)
+        print("l2Normalize")
+        print(mm)
+        return mm
     }
     
     func distanceMatrix(a:Matrix<Double>, b:Matrix<Double>) -> Double {
