@@ -77,7 +77,7 @@ class OpenFaceViewController: UIViewController {
     }
     
     func requestML(name: String , skipDetect: Bool = true) {
-        print(#function, name)
+        print(#function, name, "--------------------------------------------------------")
         let image = UIImage(named: name)!
         self.requestML(image: image, skipDetect: skipDetect)
     }
@@ -85,7 +85,7 @@ class OpenFaceViewController: UIViewController {
     func requestML(image: UIImage, skipDetect: Bool = true) {
         if skipDetect {
             //顔検出はスキップする
-            let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image), orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
+            let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBufferFromImage(image: image))
             do {
                 try MLRequestHandler.perform([self.mlRequest])
             } catch {
@@ -95,8 +95,7 @@ class OpenFaceViewController: UIViewController {
         }
         
         let pixelBuffer = pixelBufferFromImage(image: image)
-        let requestOptions:[VNImageOption : Any] = [:]
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer)
         do {
             self.currentPixelBuffer = pixelBuffer
             try imageRequestHandler.perform(self.requests)
@@ -158,29 +157,25 @@ class OpenFaceViewController: UIViewController {
                 
                 let multiArray = self.toMultiArrayFromPixelBuffer(pixelBuffer: croppedPixelBuffer)
                 print("multiArray shape",multiArray.shape)
-                
+
                 self.showImageAsTest(name: "croppedPixelBuffer", image: multiArray.transposed([2,0,1]).image(offset: 0, scale: 1)!)
-                
+
                 let prewhitened = self.prewhiten(multiArray).transposed([2,0,1]) //shape変更[w,h,c] -> [c,w,h]
                 print("prewhitened shape",prewhitened.shape)
 //                print("prewhitened",prewhitened)
-                
+
                 guard let uiImage = prewhitened.image(offset: 0.0, scale: 1.0) else {
                     print("uiImage is nil")
                     return
                 }
-                
+
                 guard let ciImage = CIImage(image: uiImage) else {
                     print("ciImage is nil")
                     return
                 }
-                let context = CIContext(options: nil)
-                guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                    print("cgImage is nil")
-                    return
-                }
                 
-                let MLRequestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: [:])
+                let MLRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+//                let MLRequestHandler = VNImageRequestHandler(cvPixelBuffer: croppedPixelBuffer, options: [:])
                 do {
 //                    let scaledRect = self.scale(rect: boundingRect, view: self.imageView)
 //                    self.currentLabelRect.append(CGRect(x: scaledRect.minX, y: scaledRect.minY - 60, width: 200, height: 50))
@@ -244,7 +239,7 @@ class OpenFaceViewController: UIViewController {
     }
     
     func toMultiArrayFromPixelBuffer(pixelBuffer: CVPixelBuffer) -> MultiArray<Double>{
-        print(#function,"----------------------------")
+        print(#function,"")
         
         ////https://stackoverflow.com/questions/8072208/how-to-turn-a-cvpixelbuffer-into-a-uiimage
         
@@ -257,7 +252,7 @@ class OpenFaceViewController: UIViewController {
         print("w,h,r",w,h,r)
         
         let channel = 3
-        var m = MultiArray<Double>(shape: [h, w, channel])
+        var m = MultiArray<Double>(shape: [w, h, channel])
         print(m.shape)
         if let buffer = CVPixelBufferGetBaseAddress(pixelBuffer) {
             
@@ -270,7 +265,7 @@ class OpenFaceViewController: UIViewController {
                     let offset = 4*x + y*r
                     
                     //https://stackoverflow.com/questions/39548344/getting-pixel-color-from-an-image-using-cgpoint-in-swift-3
-                    let a = buffer.load(fromByteOffset: offset+3, as: UInt8.self)
+//                    let a = buffer.load(fromByteOffset: offset+3, as: UInt8.self)
                     let r = buffer.load(fromByteOffset: offset+2, as: UInt8.self)
                     let g = buffer.load(fromByteOffset: offset+1, as: UInt8.self)
                     let b = buffer.load(fromByteOffset: offset, as: UInt8.self)
@@ -346,32 +341,33 @@ class OpenFaceViewController: UIViewController {
                     self.requestML(name: imageName, skipDetect: false)
                     return
                 } else {
-                    self.imageNameNumber = 1
-                    
-                    //next person
-                    imageName = "takemoto\(self.imageNameNumber).png"
-                    if let img = UIImage(named: imageName) {
-                        self.setImage(image: img)
-                        self.requestML(name: imageName, skipDetect: false)
-                        return
-                    }
-                }
-            }
-            
-            imageName = "takemoto\(self.imageNameNumber).png"
-            
-            if (self.matrixDic[imageName] == nil) {
-                self.matrixDic[imageName] = embMatrix
-                self.imageNameNumber += 1
-                imageName = "takemoto\(self.imageNameNumber).png"
-                if let img = UIImage(named: imageName) {
-                    self.setImage(image: img)
-                    self.requestML(name: imageName, skipDetect: false)
                     return
+//                    self.imageNameNumber = 1
+//
+//                    //next person
+//                    imageName = "takemoto\(self.imageNameNumber).png"
+//                    if let img = UIImage(named: imageName) {
+//                        self.setImage(image: img)
+//                        self.requestML(name: imageName, skipDetect: false)
+//                        return
+//                    }
                 }
             }
             
-            self.diff()
+//            imageName = "takemoto\(self.imageNameNumber).png"
+//
+//            if (self.matrixDic[imageName] == nil) {
+//                self.matrixDic[imageName] = embMatrix
+//                self.imageNameNumber += 1
+//                imageName = "takemoto\(self.imageNameNumber).png"
+//                if let img = UIImage(named: imageName) {
+//                    self.setImage(image: img)
+//                    self.requestML(name: imageName, skipDetect: false)
+//                    return
+//                }
+//            }
+//
+//            self.diff()
         }
     }
     

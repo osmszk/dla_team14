@@ -44,6 +44,12 @@
 		C7A203461FF91AE1000DCB94 /* takemoto1.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2033F1FF91AE1000DCB94 /* takemoto1.png */; };
 		C7A203471FF91AE1000DCB94 /* takemoto2.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203401FF91AE1000DCB94 /* takemoto2.png */; };
 		C7A203481FF91AE1000DCB94 /* takemoto2.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203401FF91AE1000DCB94 /* takemoto2.png */; };
+		C7A203502000917D000DCB94 /* FaceNet3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A2034F2000917D000DCB94 /* FaceNet3.mlmodel */; };
+		C7A203512000917D000DCB94 /* FaceNet3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A2034F2000917D000DCB94 /* FaceNet3.mlmodel */; };
+		C7A2035320009182000DCB94 /* FaceNet4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A2035220009182000DCB94 /* FaceNet4.mlmodel */; };
+		C7A2035420009182000DCB94 /* FaceNet4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A2035220009182000DCB94 /* FaceNet4.mlmodel */; };
+		C7A20356200093D0000DCB94 /* FaceNet5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */; };
+		C7A20357200093D0000DCB94 /* FaceNet5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
@@ -99,6 +105,9 @@
 		C7A2033D1FF91AE1000DCB94 /* taniai1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai1.png; sourceTree = "<group>"; };
 		C7A2033F1FF91AE1000DCB94 /* takemoto1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto1.png; sourceTree = "<group>"; };
 		C7A203401FF91AE1000DCB94 /* takemoto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto2.png; sourceTree = "<group>"; };
+		C7A2034F2000917D000DCB94 /* FaceNet3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet3.mlmodel; path = ../../../facenet/coreml/FaceNet3.mlmodel; sourceTree = "<group>"; };
+		C7A2035220009182000DCB94 /* FaceNet4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet4.mlmodel; path = ../../../facenet/coreml/FaceNet4.mlmodel; sourceTree = "<group>"; };
+		C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet5.mlmodel; path = ../../../facenet/coreml/FaceNet5.mlmodel; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -170,6 +179,9 @@
 				C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */,
 				C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */,
 				C746DC2A1FF3A23E005BC1E1 /* FaceNet2.mlmodel */,
+				C7A2034F2000917D000DCB94 /* FaceNet3.mlmodel */,
+				C7A2035220009182000DCB94 /* FaceNet4.mlmodel */,
+				C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */,
 				C7A2033A1FF91AE1000DCB94 /* images_,member */,
 				C72C6F001FE5044B005F8C0B /* clapton1.csv */,
 				C746DC2C1FF3AA7C005BC1E1 /* lennon1.csv */,
@@ -349,13 +361,16 @@
 				C72C6EFC1FE4E3B6005F8C0B /* Matrix.swift in Sources */,
 				C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */,
 				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
+				C7A20356200093D0000DCB94 /* FaceNet5.mlmodel in Sources */,
 				C72C6EFF1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift in Sources */,
+				C7A2035320009182000DCB94 /* FaceNet4.mlmodel in Sources */,
 				C72C6EF51FE4DCB9005F8C0B /* OpenFace.mlmodel in Sources */,
 				C7F1E2E61FF0F04300D32497 /* scaling.swift in Sources */,
 				C7F1E2E81FF0FB4C00D32497 /* FaceNetModel.mlmodel in Sources */,
 				C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */,
 				C746DC2B1FF3A23E005BC1E1 /* FaceNet2.mlmodel in Sources */,
 				C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */,
+				C7A203502000917D000DCB94 /* FaceNet3.mlmodel in Sources */,
 				C7A2032D1FF79C12000DCB94 /* MultiArray.swift in Sources */,
 				C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */,
 				C72C6EF91FE4E156005F8C0B /* CVPixelBuffer+Helpers.swift in Sources */,
@@ -370,7 +385,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7A203251FF62448000DCB94 /* Matrix.swift in Sources */,
+				C7A20357200093D0000DCB94 /* FaceNet5.mlmodel in Sources */,
 				C7A2031E1FF6241F000DCB94 /* SmileToCheckInTests.swift in Sources */,
+				C7A2035420009182000DCB94 /* FaceNet4.mlmodel in Sources */,
+				C7A203512000917D000DCB94 /* FaceNet3.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
