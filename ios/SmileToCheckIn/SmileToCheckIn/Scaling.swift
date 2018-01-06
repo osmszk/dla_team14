@@ -10,13 +10,14 @@ import Foundation
 import CoreML
 import Accelerate
 
-@objc(scaling) class scaling: NSObject, MLCustomLayer {
+@objc(Scaling) class Scaling: NSObject, MLCustomLayer {
     
     let scale: Float
     
     required init(parameters: [String : Any]) throws {
         if let scale = parameters["scale"] as? Float {
             self.scale = scale
+            print(#function, "[Scaling]",parameters, self.scale)
         } else {
             self.scale = 1.0
         }

@@ -50,11 +50,45 @@
 		C7A2035420009182000DCB94 /* FaceNet4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A2035220009182000DCB94 /* FaceNet4.mlmodel */; };
 		C7A20356200093D0000DCB94 /* FaceNet5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */; };
 		C7A20357200093D0000DCB94 /* FaceNet5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */; };
+		C7A2035F2000E9C9000DCB94 /* takemoto3.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203582000E9C8000DCB94 /* takemoto3.png */; };
+		C7A203602000E9C9000DCB94 /* takemoto3.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203582000E9C8000DCB94 /* takemoto3.png */; };
+		C7A203612000E9C9000DCB94 /* takemoto4.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203592000E9C8000DCB94 /* takemoto4.png */; };
+		C7A203622000E9C9000DCB94 /* takemoto4.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203592000E9C8000DCB94 /* takemoto4.png */; };
+		C7A203632000E9C9000DCB94 /* takemoto9.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035A2000E9C8000DCB94 /* takemoto9.png */; };
+		C7A203642000E9C9000DCB94 /* takemoto9.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035A2000E9C8000DCB94 /* takemoto9.png */; };
+		C7A203652000E9C9000DCB94 /* takemoto5.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035B2000E9C8000DCB94 /* takemoto5.png */; };
+		C7A203662000E9C9000DCB94 /* takemoto5.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035B2000E9C8000DCB94 /* takemoto5.png */; };
+		C7A203672000E9C9000DCB94 /* takemoto6.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035C2000E9C8000DCB94 /* takemoto6.png */; };
+		C7A203682000E9C9000DCB94 /* takemoto6.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035C2000E9C8000DCB94 /* takemoto6.png */; };
+		C7A203692000E9C9000DCB94 /* takemoto8.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035D2000E9C8000DCB94 /* takemoto8.png */; };
+		C7A2036A2000E9C9000DCB94 /* takemoto8.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035D2000E9C8000DCB94 /* takemoto8.png */; };
+		C7A2036B2000E9C9000DCB94 /* takemoto7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035E2000E9C8000DCB94 /* takemoto7.png */; };
+		C7A2036C2000E9C9000DCB94 /* takemoto7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2035E2000E9C8000DCB94 /* takemoto7.png */; };
+		C7A203742000EAE2000DCB94 /* taniai5.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2036D2000EAE1000DCB94 /* taniai5.png */; };
+		C7A203752000EAE2000DCB94 /* taniai5.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2036D2000EAE1000DCB94 /* taniai5.png */; };
+		C7A203762000EAE2000DCB94 /* taniai9.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2036E2000EAE2000DCB94 /* taniai9.png */; };
+		C7A203772000EAE2000DCB94 /* taniai9.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2036E2000EAE2000DCB94 /* taniai9.png */; };
+		C7A203782000EAE2000DCB94 /* taniai7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2036F2000EAE2000DCB94 /* taniai7.png */; };
+		C7A203792000EAE2000DCB94 /* taniai7.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A2036F2000EAE2000DCB94 /* taniai7.png */; };
+		C7A2037A2000EAE2000DCB94 /* taniai6.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203702000EAE2000DCB94 /* taniai6.png */; };
+		C7A2037B2000EAE2000DCB94 /* taniai6.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203702000EAE2000DCB94 /* taniai6.png */; };
+		C7A2037C2000EAE2000DCB94 /* taniai3.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203712000EAE2000DCB94 /* taniai3.png */; };
+		C7A2037D2000EAE2000DCB94 /* taniai3.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203712000EAE2000DCB94 /* taniai3.png */; };
+		C7A2037E2000EAE2000DCB94 /* taniai8.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203722000EAE2000DCB94 /* taniai8.png */; };
+		C7A2037F2000EAE2000DCB94 /* taniai8.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203722000EAE2000DCB94 /* taniai8.png */; };
+		C7A203802000EAE2000DCB94 /* taniai4.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203732000EAE2000DCB94 /* taniai4.png */; };
+		C7A203812000EAE2000DCB94 /* taniai4.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A203732000EAE2000DCB94 /* taniai4.png */; };
+		C7A203832000FCD3000DCB94 /* FaceNet6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A203822000FCD3000DCB94 /* FaceNet6.mlmodel */; };
+		C7A203842000FCD3000DCB94 /* FaceNet6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A203822000FCD3000DCB94 /* FaceNet6.mlmodel */; };
+		C7A203862000FFDC000DCB94 /* FaceNet7.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A203852000FFDB000DCB94 /* FaceNet7.mlmodel */; };
+		C7A203872000FFDC000DCB94 /* FaceNet7.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A203852000FFDB000DCB94 /* FaceNet7.mlmodel */; };
+		C7A20389200105EC000DCB94 /* FaceNet8.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A20388200105EC000DCB94 /* FaceNet8.mlmodel */; };
+		C7A2038A200105EC000DCB94 /* FaceNet8.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7A20388200105EC000DCB94 /* FaceNet8.mlmodel */; };
 		C7CFF3C11FD2842D009EC847 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */; };
 		C7CFF3C31FD28474009EC847 /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C21FD28474009EC847 /* VideoCapture.swift */; };
 		C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C41FD28579009EC847 /* BoundingBox.swift */; };
 		C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFF3C61FD29643009EC847 /* FPSCounter.swift */; };
-		C7F1E2E61FF0F04300D32497 /* scaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F1E2E51FF0F04300D32497 /* scaling.swift */; };
+		C7F1E2E61FF0F04300D32497 /* Scaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F1E2E51FF0F04300D32497 /* Scaling.swift */; };
 		C7F1E2E81FF0FB4C00D32497 /* FaceNetModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */; };
 /* End PBXBuildFile section */
 
@@ -108,11 +142,28 @@
 		C7A2034F2000917D000DCB94 /* FaceNet3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet3.mlmodel; path = ../../../facenet/coreml/FaceNet3.mlmodel; sourceTree = "<group>"; };
 		C7A2035220009182000DCB94 /* FaceNet4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet4.mlmodel; path = ../../../facenet/coreml/FaceNet4.mlmodel; sourceTree = "<group>"; };
 		C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet5.mlmodel; path = ../../../facenet/coreml/FaceNet5.mlmodel; sourceTree = "<group>"; };
+		C7A203582000E9C8000DCB94 /* takemoto3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto3.png; sourceTree = "<group>"; };
+		C7A203592000E9C8000DCB94 /* takemoto4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto4.png; sourceTree = "<group>"; };
+		C7A2035A2000E9C8000DCB94 /* takemoto9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto9.png; sourceTree = "<group>"; };
+		C7A2035B2000E9C8000DCB94 /* takemoto5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto5.png; sourceTree = "<group>"; };
+		C7A2035C2000E9C8000DCB94 /* takemoto6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto6.png; sourceTree = "<group>"; };
+		C7A2035D2000E9C8000DCB94 /* takemoto8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto8.png; sourceTree = "<group>"; };
+		C7A2035E2000E9C8000DCB94 /* takemoto7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takemoto7.png; sourceTree = "<group>"; };
+		C7A2036D2000EAE1000DCB94 /* taniai5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai5.png; sourceTree = "<group>"; };
+		C7A2036E2000EAE2000DCB94 /* taniai9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai9.png; sourceTree = "<group>"; };
+		C7A2036F2000EAE2000DCB94 /* taniai7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai7.png; sourceTree = "<group>"; };
+		C7A203702000EAE2000DCB94 /* taniai6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai6.png; sourceTree = "<group>"; };
+		C7A203712000EAE2000DCB94 /* taniai3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai3.png; sourceTree = "<group>"; };
+		C7A203722000EAE2000DCB94 /* taniai8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai8.png; sourceTree = "<group>"; };
+		C7A203732000EAE2000DCB94 /* taniai4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taniai4.png; sourceTree = "<group>"; };
+		C7A203822000FCD3000DCB94 /* FaceNet6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet6.mlmodel; path = ../../../facenet/coreml/FaceNet6.mlmodel; sourceTree = "<group>"; };
+		C7A203852000FFDB000DCB94 /* FaceNet7.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet7.mlmodel; path = ../../../facenet/coreml/FaceNet7.mlmodel; sourceTree = "<group>"; };
+		C7A20388200105EC000DCB94 /* FaceNet8.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet8.mlmodel; path = ../../../facenet/coreml/FaceNet8.mlmodel; sourceTree = "<group>"; };
 		C7CFF3C01FD2842D009EC847 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		C7CFF3C21FD28474009EC847 /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
 		C7CFF3C41FD28579009EC847 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		C7CFF3C61FD29643009EC847 /* FPSCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSCounter.swift; sourceTree = "<group>"; };
-		C7F1E2E51FF0F04300D32497 /* scaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scaling.swift; sourceTree = "<group>"; };
+		C7F1E2E51FF0F04300D32497 /* Scaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scaling.swift; sourceTree = "<group>"; };
 		C7F1E2E71FF0FB4C00D32497 /* FaceNetModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FaceNetModel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,7 +221,7 @@
 				C7A2032E1FF79C28000DCB94 /* MLMultiArray+Image.swift */,
 				C7A2032C1FF79C11000DCB94 /* MultiArray.swift */,
 				C7A203301FF79E35000DCB94 /* Math.swift */,
-				C7F1E2E51FF0F04300D32497 /* scaling.swift */,
+				C7F1E2E51FF0F04300D32497 /* Scaling.swift */,
 				C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */,
 				C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */,
 				C71FAAE91FC3D7D400CC8664 /* Info.plist */,
@@ -182,6 +233,9 @@
 				C7A2034F2000917D000DCB94 /* FaceNet3.mlmodel */,
 				C7A2035220009182000DCB94 /* FaceNet4.mlmodel */,
 				C7A20355200093D0000DCB94 /* FaceNet5.mlmodel */,
+				C7A203822000FCD3000DCB94 /* FaceNet6.mlmodel */,
+				C7A203852000FFDB000DCB94 /* FaceNet7.mlmodel */,
+				C7A20388200105EC000DCB94 /* FaceNet8.mlmodel */,
 				C7A2033A1FF91AE1000DCB94 /* images_,member */,
 				C72C6F001FE5044B005F8C0B /* clapton1.csv */,
 				C746DC2C1FF3AA7C005BC1E1 /* lennon1.csv */,
@@ -218,8 +272,15 @@
 		C7A2033B1FF91AE1000DCB94 /* taniai */ = {
 			isa = PBXGroup;
 			children = (
-				C7A2033C1FF91AE1000DCB94 /* taniai2.png */,
 				C7A2033D1FF91AE1000DCB94 /* taniai1.png */,
+				C7A2033C1FF91AE1000DCB94 /* taniai2.png */,
+				C7A203712000EAE2000DCB94 /* taniai3.png */,
+				C7A203732000EAE2000DCB94 /* taniai4.png */,
+				C7A2036D2000EAE1000DCB94 /* taniai5.png */,
+				C7A203702000EAE2000DCB94 /* taniai6.png */,
+				C7A2036F2000EAE2000DCB94 /* taniai7.png */,
+				C7A203722000EAE2000DCB94 /* taniai8.png */,
+				C7A2036E2000EAE2000DCB94 /* taniai9.png */,
 			);
 			path = taniai;
 			sourceTree = "<group>";
@@ -229,6 +290,13 @@
 			children = (
 				C7A2033F1FF91AE1000DCB94 /* takemoto1.png */,
 				C7A203401FF91AE1000DCB94 /* takemoto2.png */,
+				C7A203582000E9C8000DCB94 /* takemoto3.png */,
+				C7A203592000E9C8000DCB94 /* takemoto4.png */,
+				C7A2035B2000E9C8000DCB94 /* takemoto5.png */,
+				C7A2035C2000E9C8000DCB94 /* takemoto6.png */,
+				C7A2035E2000E9C8000DCB94 /* takemoto7.png */,
+				C7A2035D2000E9C8000DCB94 /* takemoto8.png */,
+				C7A2035A2000E9C8000DCB94 /* takemoto9.png */,
 			);
 			path = takemoto;
 			sourceTree = "<group>";
@@ -321,17 +389,31 @@
 				C746DC2D1FF3AA7C005BC1E1 /* lennon1.csv in Resources */,
 				C72C6F051FE5237D005F8C0B /* clapton1_openface.csv in Resources */,
 				C7A203131FF5F4D9000DCB94 /* taniai1.csv in Resources */,
+				C7A2037C2000EAE2000DCB94 /* taniai3.png in Resources */,
+				C7A203632000E9C9000DCB94 /* takemoto9.png in Resources */,
+				C7A2037A2000EAE2000DCB94 /* taniai6.png in Resources */,
 				C7A203471FF91AE1000DCB94 /* takemoto2.png in Resources */,
 				C7A203451FF91AE1000DCB94 /* takemoto1.png in Resources */,
 				C72C6F0B1FE5601E005F8C0B /* lennon2.csv in Resources */,
+				C7A203762000EAE2000DCB94 /* taniai9.png in Resources */,
 				C72C6F091FE52557005F8C0B /* carell_openface.csv in Resources */,
+				C7A203802000EAE2000DCB94 /* taniai4.png in Resources */,
+				C7A203692000E9C9000DCB94 /* takemoto8.png in Resources */,
+				C7A203612000E9C9000DCB94 /* takemoto4.png in Resources */,
 				C72C6F011FE5044B005F8C0B /* clapton1.csv in Resources */,
 				C7A203411FF91AE1000DCB94 /* taniai2.png in Resources */,
 				C71FAAE81FC3D7D400CC8664 /* LaunchScreen.storyboard in Resources */,
 				C7A203431FF91AE1000DCB94 /* taniai1.png in Resources */,
+				C7A203742000EAE2000DCB94 /* taniai5.png in Resources */,
+				C7A2035F2000E9C9000DCB94 /* takemoto3.png in Resources */,
 				C71FAAE51FC3D7D400CC8664 /* Assets.xcassets in Resources */,
 				C7A203161FF5F4D9000DCB94 /* taniai2.csv in Resources */,
+				C7A2036B2000E9C9000DCB94 /* takemoto7.png in Resources */,
 				C72C6F071FE52476005F8C0B /* clapton2_openface.csv in Resources */,
+				C7A203652000E9C9000DCB94 /* takemoto5.png in Resources */,
+				C7A203672000E9C9000DCB94 /* takemoto6.png in Resources */,
+				C7A203782000EAE2000DCB94 /* taniai7.png in Resources */,
+				C7A2037E2000EAE2000DCB94 /* taniai8.png in Resources */,
 				C71FAAE31FC3D7D400CC8664 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,8 +423,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7A203421FF91AE1000DCB94 /* taniai2.png in Resources */,
+				C7A203752000EAE2000DCB94 /* taniai5.png in Resources */,
+				C7A203662000E9C9000DCB94 /* takemoto5.png in Resources */,
+				C7A2036A2000E9C9000DCB94 /* takemoto8.png in Resources */,
+				C7A2036C2000E9C9000DCB94 /* takemoto7.png in Resources */,
+				C7A203642000E9C9000DCB94 /* takemoto9.png in Resources */,
 				C7A203461FF91AE1000DCB94 /* takemoto1.png in Resources */,
+				C7A2037D2000EAE2000DCB94 /* taniai3.png in Resources */,
+				C7A203682000E9C9000DCB94 /* takemoto6.png in Resources */,
+				C7A203602000E9C9000DCB94 /* takemoto3.png in Resources */,
+				C7A2037F2000EAE2000DCB94 /* taniai8.png in Resources */,
+				C7A203792000EAE2000DCB94 /* taniai7.png in Resources */,
+				C7A2037B2000EAE2000DCB94 /* taniai6.png in Resources */,
+				C7A203772000EAE2000DCB94 /* taniai9.png in Resources */,
 				C7A203481FF91AE1000DCB94 /* takemoto2.png in Resources */,
+				C7A203622000E9C9000DCB94 /* takemoto4.png in Resources */,
+				C7A203812000EAE2000DCB94 /* taniai4.png in Resources */,
 				C7A203441FF91AE1000DCB94 /* taniai1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +454,8 @@
 				C72C6EF31FE4DA08005F8C0B /* MemberPredict.mlmodel in Sources */,
 				C71FAAF21FC3D90C00CC8664 /* OverlayView.swift in Sources */,
 				C7A2032F1FF79C28000DCB94 /* MLMultiArray+Image.swift in Sources */,
+				C7A20389200105EC000DCB94 /* FaceNet8.mlmodel in Sources */,
+				C7A203832000FCD3000DCB94 /* FaceNet6.mlmodel in Sources */,
 				C72C6EFC1FE4E3B6005F8C0B /* Matrix.swift in Sources */,
 				C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */,
 				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
@@ -365,7 +463,7 @@
 				C72C6EFF1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift in Sources */,
 				C7A2035320009182000DCB94 /* FaceNet4.mlmodel in Sources */,
 				C72C6EF51FE4DCB9005F8C0B /* OpenFace.mlmodel in Sources */,
-				C7F1E2E61FF0F04300D32497 /* scaling.swift in Sources */,
+				C7F1E2E61FF0F04300D32497 /* Scaling.swift in Sources */,
 				C7F1E2E81FF0FB4C00D32497 /* FaceNetModel.mlmodel in Sources */,
 				C7CFF3C71FD29643009EC847 /* FPSCounter.swift in Sources */,
 				C746DC2B1FF3A23E005BC1E1 /* FaceNet2.mlmodel in Sources */,
@@ -377,6 +475,7 @@
 				C71FAADE1FC3D7D400CC8664 /* AppDelegate.swift in Sources */,
 				C72C6EF71FE4DDAD005F8C0B /* OpenFaceViewController.swift in Sources */,
 				C7A203311FF79E36000DCB94 /* Math.swift in Sources */,
+				C7A203862000FFDC000DCB94 /* FaceNet7.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,8 +485,11 @@
 			files = (
 				C7A203251FF62448000DCB94 /* Matrix.swift in Sources */,
 				C7A20357200093D0000DCB94 /* FaceNet5.mlmodel in Sources */,
+				C7A203872000FFDC000DCB94 /* FaceNet7.mlmodel in Sources */,
 				C7A2031E1FF6241F000DCB94 /* SmileToCheckInTests.swift in Sources */,
 				C7A2035420009182000DCB94 /* FaceNet4.mlmodel in Sources */,
+				C7A203842000FCD3000DCB94 /* FaceNet6.mlmodel in Sources */,
+				C7A2038A200105EC000DCB94 /* FaceNet8.mlmodel in Sources */,
 				C7A203512000917D000DCB94 /* FaceNet3.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

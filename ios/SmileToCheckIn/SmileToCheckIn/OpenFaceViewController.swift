@@ -31,7 +31,7 @@ class OpenFaceViewController: UIViewController {
     lazy var mlRequest: VNCoreMLRequest = {
         // Load the ML model through its generated class and create a Vision request for it.
         do {
-            let model = try VNCoreMLModel(for: FaceNet2().model)
+            let model = try VNCoreMLModel(for: FaceNet7().model)
             return VNCoreMLRequest(model: model, completionHandler: self.genEmbeddingsHandler)
         } catch {
             fatalError("can't load Vision ML model: \(error)")
@@ -52,6 +52,8 @@ class OpenFaceViewController: UIViewController {
     }()
     
     var matrixDic: [String : Matrix<Double>] = [:]
+    var results: [[Double]] = []
+    var normlizedDic: [String : Matrix<Double>] = [:]
     //key-> taniai1,taniai2,takemoto1,takemoto2
     
     var imageNameNumber: Int = 1
@@ -128,12 +130,12 @@ class OpenFaceViewController: UIViewController {
             print("no result")
             return
         }
-        DispatchQueue.main.async() {
-            self.imageView.layer.sublayers?.removeSubrange(1...)
-            for region in observations {
-                self.highlightFace(faceObservation: region)
-            }
-        }
+//        DispatchQueue.main.async() {
+//            self.imageView.layer.sublayers?.removeSubrange(1...)
+//            for region in observations {
+//                self.highlightFace(faceObservation: region)
+//            }
+//        }
         
 //        if (self.shouldGemEmbedding % 2 == 0) {
 //            self.shouldGemEmbedding = 1
@@ -152,7 +154,7 @@ class OpenFaceViewController: UIViewController {
                 let h = boundingRect.height * CGFloat(CVPixelBufferGetHeight(pixelBuffer))
                 let y = CGFloat(CVPixelBufferGetHeight(pixelBuffer)) * (1 - boundingRect.minY) - h
                 let scaledRect = CGRect(x: x, y: y, width: w, height: h)
-                print("boundingRect:\(boundingRect) scaledRect:\(scaledRect)")
+//                print("boundingRect:\(boundingRect) scaledRect:\(scaledRect)")
                 guard let croppedPixelBuffer = self.cropFace(imageBuffer: pixelBuffer, region: scaledRect) else { return }
                 
                 let multiArray = self.toMultiArrayFromPixelBuffer(pixelBuffer: croppedPixelBuffer)
@@ -252,7 +254,7 @@ class OpenFaceViewController: UIViewController {
         print("w,h,r",w,h,r)
         
         let channel = 3
-        var m = MultiArray<Double>(shape: [w, h, channel])
+        var m = MultiArray<Double>(shape: [h, w, channel])
         print(m.shape)
         if let buffer = CVPixelBufferGetBaseAddress(pixelBuffer) {
             
@@ -287,7 +289,7 @@ class OpenFaceViewController: UIViewController {
     func highlightFace(faceObservation: VNFaceObservation) {
         
         let boundingRect = faceObservation.boundingBox
-        print("highlightFace! \(boundingRect)")
+//        print("highlightFace! \(boundingRect)")
         let x = boundingRect.minX * imageView.frame.size.width
         let w = boundingRect.width * imageView.frame.size.width
         let h = boundingRect.height * imageView.frame.size.height
@@ -326,8 +328,10 @@ class OpenFaceViewController: UIViewController {
             }
 //            print(emb)
             let doubleValueEmb = buffer2Array(length: emb.count, data: emb.dataPointer, Double.self)
-//            print("[Result]")
             print(doubleValueEmb)
+            
+            self.results.append(doubleValueEmb)
+            
 //            print("row:\(doubleValueEmb.rows) col:\(doubleValueEmb.columns) grid:\(doubleValueEmb.grid)")
             
             let embMatrix = Matrix(Array(repeating: doubleValueEmb, count: 1))
@@ -341,34 +345,79 @@ class OpenFaceViewController: UIViewController {
                     self.requestML(name: imageName, skipDetect: false)
                     return
                 } else {
-                    return
-//                    self.imageNameNumber = 1
-//
-//                    //next person
-//                    imageName = "takemoto\(self.imageNameNumber).png"
-//                    if let img = UIImage(named: imageName) {
-//                        self.setImage(image: img)
-//                        self.requestML(name: imageName, skipDetect: false)
-//                        return
-//                    }
+                    print("*******[result taniai]*******", self.results.count, self.results[0].count)
+//                    print(self.results)
+                    
+                    let l1 = self.l2Normalize(concat:self.results)
+                    self.normlizedDic["taniai"] = l1
+                    self.imageNameNumber = 1
+                    
+                    self.results.removeAll()
+
+                    //next person
+                    imageName = "takemoto\(self.imageNameNumber).png"
+                    if let img = UIImage(named: imageName) {
+                        self.setImage(image: img)
+                        self.requestML(name: imageName, skipDetect: false)
+                        return
+                    }
                 }
             }
             
-//            imageName = "takemoto\(self.imageNameNumber).png"
-//
-//            if (self.matrixDic[imageName] == nil) {
-//                self.matrixDic[imageName] = embMatrix
-//                self.imageNameNumber += 1
-//                imageName = "takemoto\(self.imageNameNumber).png"
-//                if let img = UIImage(named: imageName) {
-//                    self.setImage(image: img)
-//                    self.requestML(name: imageName, skipDetect: false)
-//                    return
-//                }
-//            }
+            imageName = "takemoto\(self.imageNameNumber).png"
+
+            if (self.matrixDic[imageName] == nil) {
+                self.matrixDic[imageName] = embMatrix
+                self.imageNameNumber += 1
+                imageName = "takemoto\(self.imageNameNumber).png"
+                if let img = UIImage(named: imageName) {
+                    self.setImage(image: img)
+                    self.requestML(name: imageName, skipDetect: false)
+                    return
+                } else {
+                    print("*******[result takemoto]*******", self.results.count, self.results[0].count)
+                    
+                    let l2 = self.l2Normalize(concat:self.results)
+                    self.normlizedDic["takemoto"] = l2
+                    
+                }
+            }
 //
 //            self.diff()
+            self.diffNormalized()
         }
+    }
+    
+    func l2Normalize(concat: [[Double]]) -> Matrix<Double> {
+        let m = Matrix<Double>(concat)
+        
+        let sq = myPow(m, 2)
+        var summ = sum(sq, axies: .row)
+        let epsilon: Double = 1e-10
+        
+//        print(m)
+//        print(sq)
+//        print(summ)
+//        print("epsilon",epsilon)
+        for r in 0..<summ.rows {
+            if summ[row:r][0] < epsilon {
+                summ[row:r] = [epsilon]
+            }
+        }
+//        print(summ)
+        
+        let sq2 = myPow(summ, 0.5)
+        var mm = m
+        for r in 0..<mm.rows {
+            let target = sq2[row:r][0]
+            for (c, val) in m[row:r].enumerated() {
+                mm[r, c] = val/target
+            }
+        }
+//        print(sq2)
+//        print("l2Normalize")
+//        print(mm)
+        return mm
     }
     
     func distanceMatrix(a:Matrix<Double>, b:Matrix<Double>) -> Double {
@@ -398,6 +447,37 @@ class OpenFaceViewController: UIViewController {
             let l6 = distanceMatrix(a:taniai2,b:takemoto1)
             print("taniai2,takemoto1:\(l6)")
         }
+    }
+    func diffNormalized() {
+        print("--------diff diffNormalized--------")
+        let taniai1 = Matrix([self.normlizedDic["taniai"]![row:0]])
+        let taniai2 = Matrix([self.normlizedDic["taniai"]![row:1]])
+        let takemoto1 = Matrix([self.normlizedDic["takemoto"]![row:0]])
+        let takemoto2 = Matrix([self.normlizedDic["takemoto"]![row:1]])
+        
+        print("taniai dic ",self.normlizedDic["taniai"]!)
+        print("taniai row0",[self.normlizedDic["taniai"]![row:0]])
+//        print("taniai2",taniai2)
+        print("**************")
+//        print("takemoto dic ",self.normlizedDic["takemoto"]!)
+//        print("takemoto row0",[self.normlizedDic["takemoto"]![row:0]])
+        
+        print("<<<same person>>>")
+        let l1 = distanceMatrix(a:taniai1,b:taniai2)
+        print("taniai1,taniai2:\(l1)")
+        let l2 = distanceMatrix(a:takemoto1,b:takemoto2)
+        print("takemoto1,takemoto2:\(l2)")
+        
+        print("<<<different person>>>")
+        let l3 = distanceMatrix(a:taniai2,b:takemoto2)
+        print("taniai2,takemoto2:\(l3)")
+        let l4 = distanceMatrix(a:taniai1,b:takemoto1)
+        print("taniai1,takemoto1:\(l4)")
+        let l5 = distanceMatrix(a:taniai1,b:takemoto2)
+        print("taniai1,takemoto2:\(l5)")
+        let l6 = distanceMatrix(a:taniai2,b:takemoto1)
+        print("taniai2,takemoto1:\(l6)")
+        
     }
     
     func readDataFromCSV() {
