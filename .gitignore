@@ -74,3 +74,4 @@ coreml/member2_env/*
 #!keras/pretrain_model/*.h5
 !keras/result.png
 !keras/train_result.png
+!keras/pretrain_result.png
