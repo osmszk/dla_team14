@@ -1,4 +1,4 @@
-# 顔パス受付システム(通称:Smile to check-in)
+# 顔パス受付システム(通称:Smile to Check-in)
 
 ## コンセプト:**未来のチェックイン体験をつくる**
 
@@ -164,10 +164,10 @@ activation_6 (Activation)    (None, 3)                 0
 
 #### 1-4.学習済みモデルをiOS上で動かす（アプリ化）
 
- * [ソースコード](https://github.com/osmszk/dla_team14/tree/master/ios/SmileToCheckIn)
- * CoreMLToolsを使って、Kerasの生成モデルからCoreML用のモデルに変換
+ * [iOSアプリソースコード](https://github.com/osmszk/dla_team14/tree/master/ios/SmileToCheckIn)
+ * CoreMLToolsを使って、Kerasの生成モデルからCoreML用のモデルに変換 [（ソースコード）](https://github.com/osmszk/dla_team14/blob/master/coreml/convert.py)
  * iOS11のVisionFrameworkを使って顔識別
- * 顔画像をCoreMLのモデルに読み込ませ各メンバーの確率を出力し顔識別完了
+ * 顔画像をCoreMLのモデルに読み込ませ各メンバーの確率を出力し顔識別
 
 ### フェーズ2:FaceNetの学習済みモデルを用いる
 
