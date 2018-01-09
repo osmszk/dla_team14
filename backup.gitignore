@@ -67,10 +67,3 @@ keras/log.csv
 
 #vertualenv
 coreml/member2_env/*
-
-
-# except
-#!keras/train_model/*.h5
-#!keras/pretrain_model/*.h5
-!keras/result.png
-!keras/train_result.png
