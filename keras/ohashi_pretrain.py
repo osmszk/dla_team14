@@ -12,6 +12,7 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D, UpSampling2D
 from keras.utils import np_utils
 from keras.layers.normalization import BatchNormalization
+from keras import optimizers
 import szk_input
 import sys
 import numpy as np
@@ -28,7 +29,7 @@ on_momokuro = True if "-m" in sys.argv else False
 
 batch_size = 128
 nb_classes = 5 if on_momokuro else 3
-nb_epoch = 50
+nb_epoch = 200
 data_augmentation = False
 
 output_path = '/output/model.h5' if on_floydhub else './model.h5'
@@ -58,7 +59,7 @@ model = Sequential()
 
 model.add(Conv2D(32, (3, 3), padding='same', input_shape=X_train.shape[1:],name='conv1') )
 model.add(Activation('relu'))
-model.add(Conv2D(32, (3, 3),name='conv2'))
+model.add(Conv2D(32, (3, 3), padding='same', name='conv2'))
 model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -67,7 +68,7 @@ model.add(Dropout(0.25))
 model.add(Conv2D(64, (3, 3), padding='same',name='conv3'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
-model.add(Conv2D(64, (3, 3),name='conv4'))
+model.add(Conv2D(64, (3, 3),padding='same', name='conv4'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
@@ -78,27 +79,28 @@ model.add(BatchNormalization())
 model.add(Conv2D(64, (3, 3), padding='same',name='conv5'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
-model.add(Conv2D(64, (3, 3),name='conv6'))
+model.add(Conv2D(64, (3, 3), padding='same', name='conv6'))
 model.add(Activation('relu'))
-model.add(UpSampling2D(2,2))
+model.add(UpSampling2D((2,2)))
 model.add(Dropout(0.25))
 model.add(BatchNormalization())
 
 model.add(Conv2D(32, (3, 3), padding='same',name='conv7'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
-model.add(Conv2D(32, (3, 3),name='conv8'))
+model.add(Conv2D(32, (3, 3), padding='same', name='conv8'))
 model.add(Activation('relu'))
-model.add(UpSampling2D(2,2))
+model.add(UpSampling2D((2,2)))
 model.add(Dropout(0.25))
 model.add(BatchNormalization())
 model.add(Conv2D(img_channels, (3, 3), activation='linear', padding='same', name='conv9'))
 
 model.summary()
 
+
+opt_adam = optimizers.Adam(lr=0.0005)
 model.compile(loss='mse',
-              optimizer='adam',
-              lr=0.001)
+              optimizer=opt_adam)
 
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
@@ -108,8 +110,8 @@ X_test /= 255
 from keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 csv_logger = CSVLogger('log.csv', append=True, separator=';')
 
-fpath = 'pretrain_weights.{epoch:02d}-{loss:.2f}-{val_loss:.2f}.h5'
-cp_cb = ModelCheckpoint(fpath, monitor='val_loss', verbose=1, save_best_only=True, mode='auto')
+fpath = './pretrain_model/pretrain_weights.{epoch:02d}-{loss:.2f}-{val_loss:.2f}.h5'
+cp_cb = ModelCheckpoint(fpath, monitor='val_loss', verbose=1, save_best_only=True, mode='auto', save_weights_only=True)
 
 stopping = EarlyStopping(monitor='val_loss', patience=10, verbose=1)
 

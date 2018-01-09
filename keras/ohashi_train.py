@@ -12,6 +12,8 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import np_utils
 from keras.layers.normalization import BatchNormalization
+from keras import optimizers
+
 import szk_input
 import sys
 import numpy as np
@@ -32,7 +34,7 @@ nb_epoch = 50
 data_augmentation = False
 
 output_path = '/output/model.h5' if on_floydhub else './model.h5'
-graph_path = '/output/result.png' if on_floydhub else './result.png'
+graph_path = '/output/result.png' if on_floydhub else './train_result.png'
 train_data_path = '/data/train/data.txt' if on_floydhub else './data/train/data.txt'
 test_data_path = '/data/test/data.txt' if on_floydhub else './data/test/data.txt'
 
@@ -56,38 +58,43 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
 
-model.add(Conv2D(32, (3, 3), padding='same', input_shape=X_train.shape[1:]) ,name='conv1')
+model.add(Conv2D(32, (3, 3), padding='same', input_shape=X_train.shape[1:] ,name='conv1'))
 model.add(Activation('relu'))
-model.add(Conv2D(32, (3, 3)),name='conv2')
+model.add(Conv2D(32, (3, 3),padding='same',name='conv2'))
 model.add(BatchNormalization())
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
-model.add(Conv2D(64, (3, 3), padding='same'),name='conv3')
+model.add(Conv2D(64, (3, 3), padding='same',name='conv3'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
-model.add(Conv2D(64, (3, 3)),name='conv4')
+model.add(Conv2D(64, (3, 3),padding='same', name='conv4'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
+
+pre_trained_filename='./pretrain_model/pretrain_weights.87-0.00-0.00.h5'
+model.load_weights(pre_trained_filename, by_name=True)
+
+
 
 model.add(Flatten())
-model.add(Dense(512),name='dense1')
+model.add(Dense(512,name='dense1'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
 model.add(Dropout(0.5))
-model.add(Dense(nb_classes),name='dense2')
+model.add(Dense(nb_classes,name='dense2'))
 model.add(Activation('softmax'))
+
+#pre_trained_filename='./pretrain_model/pretrain_weights.87-0.00-0.00.h5'
+#model.load_weights(pre_trained_filename, by_name=True)
 
 model.summary()
 
-pre_trained_filename='pretrain_weights.'
-model.load_weights(pre_trained_filename, by_name=True)
-
+opt_adam = optimizers.Adam(lr=0.00001)
 model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
-              lr=0.00001,
+              optimizer=opt_adam,
               metrics=['accuracy'])
 
 X_train = X_train.astype('float32')
@@ -98,7 +105,7 @@ X_test /= 255
 from keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 csv_logger = CSVLogger('log.csv', append=True, separator=';')
 
-fpath = 'weights.{epoch:02d}-{loss:.2f}-{acc:.2f}-{val_loss:.2f}-{val_acc:.2f}.h5'
+fpath = './train_model/weights.{epoch:02d}-{loss:.2f}-{acc:.2f}-{val_loss:.2f}-{val_acc:.2f}.h5'
 cp_cb = ModelCheckpoint(fpath, monitor='val_loss', verbose=1, save_best_only=True, mode='auto')
 
 stopping = EarlyStopping(monitor='val_loss', patience=10, verbose=1)
