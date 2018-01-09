@@ -1,11 +1,8 @@
 # 顔パス受付システム(通称:Smile to check-in)
-------
 
-## コンセプト　**未来のチェックイン体験をつくる**
-------
+## コンセプト:**未来のチェックイン体験をつくる**
 
 ## 開発環境
-------
 
 - ruby 2.3.1
 - python 3.6.0 (CoreMLTools使うには2.7)
@@ -17,7 +14,6 @@
 
 
 ## プロジェクトのマイルストンと結果
-------
 
 ### フェーズ1:メンバーの顔をデータセットとして学習させる(メンバーの識別)
 
@@ -28,15 +24,18 @@
  * [ソースコード](https://github.com/osmszk/dla_team14/tree/master/webcam)
 
 #### 1-2.メンバーの顔を検出&切り抜き
+
  * OpenCVやFaceNetを用いて顔検出し、切り抜き
  * [OpenCV版ソースコード](https://github.com/osmszk/dla_team14/tree/master/face_detect_opencv)
  * [FaceNet版ソースコード](https://github.com/osmszk/dla_team14/tree/master/face_detect_facenet )
 
 #### 1-3.CNNで学習
+
  * モデル構成は下記
  * ソースコード [train](https://github.com/osmszk/dla_team14/blob/master/keras/ohashi_train.py), [pretrain](https://github.com/osmszk/dla_team14/blob/master/keras/ohashi_train.py)
 
 #### 過学習を防ぐために工夫した点
+
  * pretain後にtrain
  * dropout
 
@@ -115,6 +114,7 @@ conv9 (Conv2D)               (None, 112, 112, 3)       867
 ```
 
 ##### 2.train
+
 ```
 Layer (type)                 Output Shape              Param #
 =================================================================
@@ -163,6 +163,7 @@ activation_6 (Activation)    (None, 3)                 0
 ```
 
 #### 1-4.学習済みモデルをiOS上で動かす（アプリ化）
+
  * [ソースコード](https://github.com/osmszk/dla_team14/tree/master/ios/SmileToCheckIn)
  * CoreMLToolsを使って、Kerasの生成モデルからCoreML用のモデルに変換
  * iOS11のVisionFrameworkを使って顔識別
@@ -177,11 +178,12 @@ activation_6 (Activation)    (None, 3)                 0
  * Jupyter Notebook上でのDemo実施[（ソースコード）](https://github.com/osmszk/dla_team14/blob/master/facenet/demo/FacenetDemo.ipynb)
 
 #### 2-2.モデルをWebアプリケーション化
+
  * 未実装(TODO)
  * iOSアプリケーション検証の結果動かないことが判明したのでWebアプリ化する　[（検証ソースコード）](https://github.com/osmszk/dla_team14/blob/master/ios/SmileToCheckIn/SmileToCheckIn/OpenFaceViewController.swift)
 
  ## TODO
- ------
+
   * iOSアプリの、受付らしさのあるUI実装
   * FaceNet学習済みモデルをWebアプリケーションとして実装
   * 脆弱性の改善(ex 写真ではなく動画として識別、深度センサーを使った判定、複数台カメラを使った判定etc...)
