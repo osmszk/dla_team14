@@ -36,7 +36,7 @@
 
 #### 過学習を防ぐために工夫した点
 
- * pretain後にtrain
+ * pretain
  * dropout
 
 #### CNNネットワークモデル構成(Keras#summary)
