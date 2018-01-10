@@ -8,12 +8,10 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 from skimage.transform import resize
 
-cascade_path = '../webcam/haarcascade_frontalface_alt2.xml'
 
 import sys
 sys.path.append('../facenet/code')
 import facenet_keras_v1
-model = facenet_keras_v1.InceptionResNetV1(weights_path='../facenet/model/facenet-keras/weights/facenet_keras_weights.h5')
 
 def prewhiten(x):
     if x.ndim == 4:
@@ -36,6 +34,7 @@ def l2_normalize(x, axis=-1, epsilon=1e-10):
     return output
 
 def calc_embs(imgs, margin, batch_size):
+    model = facenet_keras_v1.InceptionResNetV1(weights_path='../facenet/model/facenet-keras/weights/facenet_keras_weights.h5')
     aligned_images = prewhiten(imgs)
     pd = []
     for start in range(0, len(aligned_images), batch_size):
@@ -68,7 +67,8 @@ class FaceDemo(object):
             is_capturing = False
 
         imgs = []
-        signal.signal(signal.SIGINT, self._signal_handler)
+        #ValueError: signal only works in main thread
+        # signal.signal(signal.SIGINT, self._signal_handler)
         self.is_interrupted = False
         while is_capturing:
             is_capturing, frame = vc.read()
@@ -135,7 +135,7 @@ class FaceDemo(object):
         else:
             is_capturing = False
 
-        signal.signal(signal.SIGINT, self._signal_handler)
+        # signal.signal(signal.SIGINT, self._signal_handler)
         self.is_interrupted = False
         while is_capturing:
             is_capturing, frame = vc.read()
@@ -161,10 +161,10 @@ class FaceDemo(object):
                               (left-1, bottom-1),
                               (right+1, top+1),
                               (255, 0, 0), thickness=2)
-            plt.imshow(frame)
-            plt.title(pred)
-            plt.xticks([])
-            plt.yticks([])
+            # plt.imshow(frame)
+            # plt.title(pred)
+            # plt.xticks([])
+            # plt.yticks([])
             display.clear_output(wait=True)
             try:
                 plt.pause(0.1)
@@ -173,3 +173,4 @@ class FaceDemo(object):
             if self.is_interrupted:
                 vc.release()
                 break
+            return pred
