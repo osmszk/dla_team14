@@ -36,9 +36,9 @@
 
 #### 過学習を防ぐために工夫した点
 
- *サンプルデータが少ないためstacked convolutional autoencoderでpre-trainingを行った。
- *Pre-trainingされたエンコーダー部に全結合層をつなげて識別器とし、Fine-tuningを実施した。
- *正則化のために、DropoutとBatch-Normalaztionを用いた。
+ * サンプルデータが少ないためstacked convolutional autoencoderでpre-trainingを行った。
+ * Pre-trainingされたエンコーダー部に全結合層をつなげて識別器とし、Fine-tuningを実施した。
+ * 正則化のために、DropoutとBatch-Normalaztionを用いた。
 
 #### CNNネットワークモデル構成(Keras#summary)
 
