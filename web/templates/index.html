@@ -13,7 +13,7 @@
     </form>
     {% if train_warning %}
     <p class="warning">
-        {train_warning}
+        {{train_warning}}
     </p>
     {% endif %}
 
@@ -25,5 +25,10 @@
                 判定結果:{{result}}
     </p>
     {% endif %}
+  </div>
+
+  <div class="debug">
+    <p>[debug]</p>
+    <p>data:{{data}}</p>
   </div>
 {% endblock %}

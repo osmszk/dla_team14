@@ -119,6 +119,7 @@ class FaceDemo(object):
         embs = []
         names = self.data.keys()
         for name, imgs in self.data.items():
+            print('calc...')
             embs_ = calc_embs(imgs, self.margin, self.batch_size)
             labels.extend([name] * len(embs_))
             embs.append(embs_)
@@ -190,4 +191,10 @@ class FaceDemo(object):
             vc.release()
 
             print('pred:',pred)
+            if pred == None:
+                return 'Unknown'
+                
             return pred[0] if len(pred) > 0 else 'Unknown'
+
+    def get_data(self):
+        return self.data
