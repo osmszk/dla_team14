@@ -59,6 +59,7 @@ class FaceDemo(object):
         self.is_interrupted = True
 
     def capture_images(self, name='Unknown'):
+        print('CAPTURE...')
         vc = cv2.VideoCapture(0)
         self.vc = vc
         if vc.isOpened():
@@ -93,14 +94,15 @@ class FaceDemo(object):
                               (right+1, top+1),
                               (255, 0, 0), thickness=2)
 
-            plt.imshow(frame)
-            plt.title('{}/{}'.format(len(imgs), self.n_img_per_person))
-            plt.xticks([])
-            plt.yticks([])
+            # plt.imshow(frame)
+            # plt.title('{}/{}'.format(len(imgs), self.n_img_per_person))
+            # plt.xticks([])
+            # plt.yticks([])
             display.clear_output(wait=True)
             if len(imgs) == self.n_img_per_person:
                 vc.release()
                 self.data[name] = np.array(imgs)
+                print('data Add! name:', name)
                 break
             try:
                 plt.pause(0.1)
@@ -111,6 +113,8 @@ class FaceDemo(object):
                 break
 
     def train(self):
+        print('TRAINING...')
+
         labels = []
         embs = []
         names = self.data.keys()
@@ -118,16 +122,25 @@ class FaceDemo(object):
             embs_ = calc_embs(imgs, self.margin, self.batch_size)
             labels.extend([name] * len(embs_))
             embs.append(embs_)
+        print('names length',len(names))
+        print(labels)
+        if len(names) <= 1:
+            return '2人以上登録してください。'
 
         embs = np.concatenate(embs)
         le = LabelEncoder().fit(labels)
         y = le.transform(labels)
+        print('SVC Fit start')
         clf = SVC(kernel='linear', probability=True).fit(embs, y)
 
         self.le = le
         self.clf = clf
+        print('SVC Fit DONE')
+        return None
 
     def infer(self):
+        print('INFERING...')
+
         vc = cv2.VideoCapture(0)
         self.vc = vc
         if vc.isOpened():
@@ -135,6 +148,7 @@ class FaceDemo(object):
         else:
             is_capturing = False
 
+        #ValueError: signal only works in main thread
         # signal.signal(signal.SIGINT, self._signal_handler)
         self.is_interrupted = False
         while is_capturing:
@@ -173,4 +187,7 @@ class FaceDemo(object):
             if self.is_interrupted:
                 vc.release()
                 break
-            return pred
+            vc.release()
+
+            print('pred:',pred)
+            return pred[0] if len(pred) > 0 else 'Unknown'

@@ -30,20 +30,23 @@ f = facedemo.FaceDemo(cascade_path)
 def index():
   return render_template('index.html')
 
-@app.route('/start', methods=['POST'])
+@app.route('/add', methods=['POST'])
 def start():
-    f.capture_images('suzuki')
-    return render_template('index.html')
+    name = request.form.get('name')
+    print('name is ',name)
+    if name == '':
+        name = 'Unknown'
 
-@app.route('/shun', methods=['POST'])
-def shun():
-    f.capture_images('shun')
+    #TODO: 読み込んでる画像のプレビューを表示させる
+    f.capture_images(name)
     return render_template('index.html')
 
 @app.route('/train', methods=['POST'])
 def train():
-    f.train()
-    return render_template('index.html')
+
+    train_warning = f.train()
+    print('train warning',train_warning)
+    return render_template('index.html',train_warning=train_warning)
 
 @app.route('/infer', methods=['POST'])
 def infer():

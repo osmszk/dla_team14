@@ -3,30 +3,26 @@
   <!-- Form
   ================================================== -->
   <div class="col-md-12" style="margin-top:10px; margin-bottom:20px;">
-    <form action="/start" method="post" class="form-inline" enctype = "multipart/form-data">
-      <!-- <input type = "file" name = "file" /> -->
-      <button type="submit" class="btn btn-primary" style="margin-top:5px;">開始</button>
-    </form>
-
-    <form action="/shun" method="post" class="form-inline" enctype = "multipart/form-data">
-      <!-- <input type = "file" name = "file" /> -->
-      <button type="submit" class="btn btn-primary" style="margin-top:5px;">開始shun</button>
+    <form action="/add" method="post" class="form-inline" enctype = "multipart/form-data">
+      <input type = "text" name = "name" />
+      <button type="submit" class="btn btn-primary" style="margin-top:5px;">登録</button>
     </form>
 
     <form action="/train" method="post" class="form-inline" enctype = "multipart/form-data">
-      <!-- <input type = "file" name = "file" /> -->
       <button type="submit" class="btn btn-primary" style="margin-top:5px;">train</button>
     </form>
+    {% if train_warning %}
+    <p class="warning">
+        {train_warning}
+    </p>
+    {% endif %}
 
     <form action="/infer" method="post" class="form-inline" enctype = "multipart/form-data">
-      <!-- <input type = "file" name = "file" /> -->
       <button type="submit" class="btn btn-primary" style="margin-top:5px;">infer</button>
     </form>
     {% if result %}
     <p class="detail_container">
-                <判定結果><br>
-                {{result}}<br>
-
+                判定結果:{{result}}
     </p>
     {% endif %}
   </div>
