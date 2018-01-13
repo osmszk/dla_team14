@@ -37,8 +37,10 @@ def calc_embs(imgs, margin, batch_size):
     model = facenet_keras_v1.InceptionResNetV1(weights_path='../facenet/model/facenet-keras/weights/facenet_keras_weights.h5')
     aligned_images = prewhiten(imgs)
     pd = []
+    print('predict...')
     for start in range(0, len(aligned_images), batch_size):
         pd.append(model.predict_on_batch(aligned_images[start:start+batch_size]))
+    print('l2_normalize...')
     embs = l2_normalize(np.concatenate(pd))
 
     return embs
@@ -193,7 +195,7 @@ class FaceDemo(object):
             print('pred:',pred)
             if pred == None:
                 return 'Unknown'
-                
+
             return pred[0] if len(pred) > 0 else 'Unknown'
 
     def get_data(self):
