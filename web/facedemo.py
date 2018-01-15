@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 from skimage.transform import resize
 
 from PIL import Image
+import glob, os
 
 import sys
 # TODO:fix
@@ -35,8 +36,7 @@ def l2_normalize(x, axis=-1, epsilon=1e-10):
     output = x / np.sqrt(np.maximum(np.sum(np.square(x), axis=axis, keepdims=True), epsilon))
     return output
 
-def calc_embs(imgs, margin, batch_size):
-    model = facenet_keras_v1.InceptionResNetV1(weights_path='../facenet/model/facenet-keras/weights/facenet_keras_weights.h5')
+def calc_embs(imgs, margin, batch_size, model):
     aligned_images = prewhiten(imgs)
     pd = []
     print('predict...')
@@ -58,9 +58,12 @@ class FaceDemo(object):
         self.data = {}
         self.le = None
         self.clf = None
+        self.remove_images()
 
     def _signal_handler(self, signal, frame):
         self.is_interrupted = True
+
+
 
     def capture_images(self, name='Unknown'):
         print('CAPTURE...')
@@ -83,16 +86,16 @@ class FaceDemo(object):
                                          scaleFactor=1.1,
                                          minNeighbors=3,
                                          minSize=(100, 100))
-            if len(faces) != 0:
+            print(frame.shape)
+            if len(faces) != 0 and len(frame.shape) == 3 and frame.shape[2] == 3:
                 face = faces[0]
                 (x, y, w, h) = face
                 left = x - self.margin // 2
                 right = x + w + self.margin // 2
                 bottom = y - self.margin // 2
                 top = y + h + self.margin // 2
-                img = resize(frame[bottom:top, left:right, :],
-                             (160, 160), mode='reflect')
-                
+                img = resize(frame[bottom:top, left:right, :],(160, 160), mode='reflect')
+
                 print("img add!")
                 plt.imshow(img)
                 file = "static/images/"+name + str(i) + ".jpg"
@@ -126,12 +129,16 @@ class FaceDemo(object):
     def train(self):
         print('TRAINING...')
 
+        print('loading model...')
+        self.model = facenet_keras_v1.InceptionResNetV1(weights_path='../facenet/model/facenet-keras/weights/facenet_keras_weights.h5')
+        print('loading model done')
+
         labels = []
         embs = []
         names = self.data.keys()
         for name, imgs in self.data.items():
             print('calc...')
-            embs_ = calc_embs(imgs, self.margin, self.batch_size)
+            embs_ = calc_embs(imgs, self.margin, self.batch_size, self.model)
             labels.extend([name] * len(embs_))
             embs.append(embs_)
         print('names length',len(names))
@@ -180,7 +187,7 @@ class FaceDemo(object):
                 top = y + h + self.margin // 2
                 img = resize(frame[bottom:top, left:right, :],
                              (160, 160), mode='reflect')
-                embs = calc_embs(img[np.newaxis], self.margin, 1)
+                embs = calc_embs(img[np.newaxis], self.margin, 1, self.model)
                 pred = self.le.inverse_transform(self.clf.predict(embs))
                 # 切り取った画像に枠線が入り込まないように調整
                 cv2.rectangle(frame,
@@ -207,8 +214,14 @@ class FaceDemo(object):
 
             return pred[0] if len(pred) > 0 else 'Unknown'
 
+    def remove_images(self):
+        dir = "static/images/*.jpg"
+        r = glob.glob(dir)
+        for i in r:
+            os.remove(i)
+
     def get_data(self):
-        return self.data
+        return self.data.keys()
 
     def get_image_files(self, name):
         return ['images/'+name+str(i)+'.jpg' for i in range(self.n_img_per_person)]

@@ -3,6 +3,18 @@
   <!-- Form
   ================================================== -->
   <div class="col-md-12" style="margin-top:10px; margin-bottom:20px;">
+    {% if result %}
+    <div class="alert alert-info">
+                判定結果:{{result}}
+    </div>
+    {% endif %}
+
+    {% if train_warning %}
+    <div class="alert alert-danger">
+        {{train_warning}}
+    </div>
+    {% endif %}
+
     <form action="/add" method="post" class="form-inline" enctype = "multipart/form-data">
       <input type = "text" name = "name" />
       <button type="submit" class="btn btn-primary" style="margin-top:5px;">登録</button>
@@ -11,20 +23,12 @@
     <form action="/train" method="post" class="form-inline" enctype = "multipart/form-data">
       <button type="submit" class="btn btn-primary" style="margin-top:5px;">train</button>
     </form>
-    {% if train_warning %}
-    <p class="warning">
-        {{train_warning}}
-    </p>
-    {% endif %}
+
 
     <form action="/infer" method="post" class="form-inline" enctype = "multipart/form-data">
       <button type="submit" class="btn btn-primary" style="margin-top:5px;">infer</button>
     </form>
-    {% if result %}
-    <div class="detail_container">
-                判定結果:{{result}}
-    </div>
-    {% endif %}
+
 
     {% if show_data %}
     <div class="preview">

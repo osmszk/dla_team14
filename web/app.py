@@ -38,7 +38,6 @@ def start():
     if name == '':
         name = 'Unknown'
 
-    #TODO: 読み込んでる画像のプレビューを表示させる
     f.capture_images(name)
     data = f.get_data()
     image_files = f.get_image_files(name)
@@ -49,7 +48,7 @@ def start():
 def train():
 
     train_warning = f.train()
-    print('train warning',train_warning)
+    print('train warning:',train_warning)
     data = f.get_data()
     return render_template('index.html',train_warning=train_warning, data=data)
 
@@ -58,10 +57,6 @@ def infer():
     result = f.infer()
     data = f.get_data()
     return render_template('index.html', result=result, data=data)
-
-
-
-
 
 if __name__ == '__main__':
   app.debug = True
