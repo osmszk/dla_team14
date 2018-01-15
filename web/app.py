@@ -41,7 +41,9 @@ def start():
     #TODO: 読み込んでる画像のプレビューを表示させる
     f.capture_images(name)
     data = f.get_data()
-    return render_template('index.html', data=data)
+    image_files = f.get_image_files(name)
+    print(image_files)
+    return render_template('index.html', data=data, show_data=True, image_files=image_files)
 
 @app.route('/train', methods=['POST'])
 def train():
@@ -56,6 +58,10 @@ def infer():
     result = f.infer()
     data = f.get_data()
     return render_template('index.html', result=result, data=data)
+
+
+
+
 
 if __name__ == '__main__':
   app.debug = True

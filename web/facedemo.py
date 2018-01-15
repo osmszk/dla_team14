@@ -8,8 +8,10 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 from skimage.transform import resize
 
+from PIL import Image
 
 import sys
+# TODO:fix
 sys.path.append('../facenet/code')
 import facenet_keras_v1
 
@@ -73,6 +75,7 @@ class FaceDemo(object):
         #ValueError: signal only works in main thread
         # signal.signal(signal.SIGINT, self._signal_handler)
         self.is_interrupted = False
+        i = 0
         while is_capturing:
             is_capturing, frame = vc.read()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -89,12 +92,18 @@ class FaceDemo(object):
                 top = y + h + self.margin // 2
                 img = resize(frame[bottom:top, left:right, :],
                              (160, 160), mode='reflect')
+                
+                print("img add!")
+                plt.imshow(img)
+                file = "static/images/"+name + str(i) + ".jpg"
+                plt.savefig(file)
                 imgs.append(img)
                 # 切り取った画像に枠線が入り込まないように調整
                 cv2.rectangle(frame,
                               (left-1, bottom-1),
                               (right+1, top+1),
                               (255, 0, 0), thickness=2)
+                i += 1
 
             # plt.imshow(frame)
             # plt.title('{}/{}'.format(len(imgs), self.n_img_per_person))
@@ -200,3 +209,6 @@ class FaceDemo(object):
 
     def get_data(self):
         return self.data
+
+    def get_image_files(self, name):
+        return ['images/'+name+str(i)+'.jpg' for i in range(self.n_img_per_person)]

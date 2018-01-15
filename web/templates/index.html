@@ -21,14 +21,26 @@
       <button type="submit" class="btn btn-primary" style="margin-top:5px;">infer</button>
     </form>
     {% if result %}
-    <p class="detail_container">
+    <div class="detail_container">
                 判定結果:{{result}}
-    </p>
+    </div>
     {% endif %}
+
+    {% if show_data %}
+    <div class="preview">
+      <ul class="list-unstyled">
+        {% for image_file in image_files %}
+        <li>
+          <img src="{{url_for('static', filename=image_file) }}" width="15%" height="15%">
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
   </div>
 
   <div class="debug">
-    <p>[debug]</p>
-    <p>data:{{data}}</p>
+    [debug]data:{{data}}
   </div>
 {% endblock %}
