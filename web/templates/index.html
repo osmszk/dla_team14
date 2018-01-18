@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+  <div class="col-md-12" style="margin-top:10px; margin-bottom:20px;">
+    {% if result %}
+    <div class="alert alert-info">
+                判定結果:{{result}}
+    </div>
+    {% endif %}
+
+    {% if train_warning %}
+    <div class="alert alert-danger">
+        {{train_warning}}
+    </div>
+    {% endif %}
+
+    <form action="/add" method="post" class="form-inline" enctype = "multipart/form-data">
+      <input type = "text" name = "name" />
+      <button type="submit" class="btn btn-primary" style="margin-top:5px;">登録</button>
+    </form>
+
+    <form action="/train" method="post" class="form-inline" enctype = "multipart/form-data">
+      <button type="submit" class="btn btn-primary" style="margin-top:5px;">train</button>
+    </form>
+
+
+    <form action="/infer" method="post" class="form-inline" enctype = "multipart/form-data">
+      <button type="submit" class="btn btn-primary" style="margin-top:5px;">infer</button>
+    </form>
+
+
+    {% if show_data %}
+    <div class="preview">
+      <ul class="list-unstyled">
+        {% for image_file in image_files %}
+        <li>
+          <img src="{{url_for('static', filename=image_file) }}" width="15%" height="15%">
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="debug">
+    [debug]data:{{data}}
+  </div>
+{% endblock %}
