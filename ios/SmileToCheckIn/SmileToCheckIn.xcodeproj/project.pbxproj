@@ -27,6 +27,7 @@
 		C72C6F0B1FE5601E005F8C0B /* lennon2.csv in Resources */ = {isa = PBXBuildFile; fileRef = C72C6F0A1FE5601E005F8C0B /* lennon2.csv */; };
 		C746DC2B1FF3A23E005BC1E1 /* FaceNet2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C746DC2A1FF3A23E005BC1E1 /* FaceNet2.mlmodel */; };
 		C746DC2D1FF3AA7C005BC1E1 /* lennon1.csv in Resources */ = {isa = PBXBuildFile; fileRef = C746DC2C1FF3AA7C005BC1E1 /* lennon1.csv */; };
+		C76063B8201072CB00C416AB /* MemberOhashiPredict.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C76063B7201072CB00C416AB /* MemberOhashiPredict.mlmodel */; };
 		C7A203131FF5F4D9000DCB94 /* taniai1.csv in Resources */ = {isa = PBXBuildFile; fileRef = C7A2030F1FF5F4D6000DCB94 /* taniai1.csv */; };
 		C7A203141FF5F4D9000DCB94 /* takemoto1.csv in Resources */ = {isa = PBXBuildFile; fileRef = C7A203101FF5F4D6000DCB94 /* takemoto1.csv */; };
 		C7A203151FF5F4D9000DCB94 /* takemoto2.csv in Resources */ = {isa = PBXBuildFile; fileRef = C7A203111FF5F4D7000DCB94 /* takemoto2.csv */; };
@@ -125,6 +126,7 @@
 		C72C6F0A1FE5601E005F8C0B /* lennon2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lennon2.csv; sourceTree = "<group>"; };
 		C746DC2A1FF3A23E005BC1E1 /* FaceNet2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = FaceNet2.mlmodel; path = ../../../facenet/coreml/FaceNet2.mlmodel; sourceTree = "<group>"; };
 		C746DC2C1FF3AA7C005BC1E1 /* lennon1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lennon1.csv; sourceTree = "<group>"; };
+		C76063B7201072CB00C416AB /* MemberOhashiPredict.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MemberOhashiPredict.mlmodel; path = ../../../coreml/MemberOhashiPredict.mlmodel; sourceTree = "<group>"; };
 		C7A2030F1FF5F4D6000DCB94 /* taniai1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taniai1.csv; sourceTree = "<group>"; };
 		C7A203101FF5F4D6000DCB94 /* takemoto1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = takemoto1.csv; sourceTree = "<group>"; };
 		C7A203111FF5F4D7000DCB94 /* takemoto2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = takemoto2.csv; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				C71FAAE41FC3D7D400CC8664 /* Assets.xcassets */,
 				C71FAAE61FC3D7D400CC8664 /* LaunchScreen.storyboard */,
 				C71FAAE91FC3D7D400CC8664 /* Info.plist */,
+				C76063B7201072CB00C416AB /* MemberOhashiPredict.mlmodel */,
 				C72C6EF21FE4DA08005F8C0B /* MemberPredict.mlmodel */,
 				C71FAAEF1FC3D8A400CC8664 /* MomoPredict.mlmodel */,
 				C72C6EF41FE4DCB9005F8C0B /* OpenFace.mlmodel */,
@@ -458,6 +461,7 @@
 				C7A203832000FCD3000DCB94 /* FaceNet6.mlmodel in Sources */,
 				C72C6EFC1FE4E3B6005F8C0B /* Matrix.swift in Sources */,
 				C7CFF3C51FD28579009EC847 /* BoundingBox.swift in Sources */,
+				C76063B8201072CB00C416AB /* MemberOhashiPredict.mlmodel in Sources */,
 				C71FAAE01FC3D7D400CC8664 /* MomoViewController.swift in Sources */,
 				C7A20356200093D0000DCB94 /* FaceNet5.mlmodel in Sources */,
 				C72C6EFF1FE4F93A005F8C0B /* UIImage+CVPixelBuffer.swift in Sources */,

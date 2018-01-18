@@ -42,7 +42,7 @@ class MomoViewController: UIViewController {
     var connection : AVCaptureConnection?
     let inputSize: CGFloat = 112
     
-    let momoPredict = MemberPredict()
+    let momoPredict = MemberOhashiPredict()
     
     lazy var faceRequest: VNDetectFaceRectanglesRequest = {
         return VNDetectFaceRectanglesRequest(completionHandler: self.vnRequestHandler)
@@ -300,7 +300,12 @@ extension MomoViewController {
     
     private func handleClassification(request: VNRequest, error: Error?) {
         guard let observations = request.results as? [VNClassificationObservation]
-            else { fatalError("unexpected result type from VNCoreMLRequest") }
+            else {
+                print("unexpected result type from VNCoreMLRequest")
+//                fatalError("unexpected result type from VNCoreMLRequest")
+                return
+                
+        }
         
         DispatchQueue.main.async {
             print(observations)
