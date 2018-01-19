@@ -16,17 +16,17 @@
     {% endif %}
 
     <form action="/add" method="post" class="form-inline" enctype = "multipart/form-data">
-      <input type = "text" name = "name" />
-      <button type="submit" class="btn btn-primary" style="margin-top:5px;">登録</button>
+      <input type = "text" name = "name" placeholder="Input your name."/>
+      <button type="submit" class="btn btn-default" style="margin-top:5px;">Add person</button>
     </form>
 
     <form action="/train" method="post" class="form-inline" enctype = "multipart/form-data">
-      <button type="submit" class="btn btn-primary" style="margin-top:5px;">train</button>
+      <button type="submit" class="btn btn-default" style="margin-top:5px;">train</button>
     </form>
 
 
     <form action="/infer" method="post" class="form-inline" enctype = "multipart/form-data">
-      <button type="submit" class="btn btn-primary" style="margin-top:5px;">infer</button>
+      <button type="submit" class="btn btn-primary" style="margin-top:10px;">Check-in</button>
     </form>
 
 
